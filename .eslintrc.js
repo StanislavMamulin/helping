@@ -27,5 +27,7 @@ module.exports = {
     'react-hooks/exhaustive-deps': 'warn',
     'no-underscore-dangle': 'off',
     'no-param-reassign': 'off',
+    'react/jsx-filename-extension': ['error', {extensions: ['.js', '.jsx']}],
+    'react/prop-types': [0],
   },
 };
