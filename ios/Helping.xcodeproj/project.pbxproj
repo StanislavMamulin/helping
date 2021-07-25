@@ -14,6 +14,7 @@
 		4AF3C7180FFC897CE9590264 /* libPods-Helping.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 01254A54CF2303E109B383A6 /* libPods-Helping.a */; };
 		7C9A9D4E4FAF287AB0146B14 /* libPods-Helping-HelpingTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = FA4E599FF6E320B9F8C32DA5 /* libPods-Helping-HelpingTests.a */; };
 		81AB9BB82411601600AC10FF /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 81AB9BB72411601600AC10FF /* LaunchScreen.storyboard */; };
+		E83220C1D9E243EAAC7A66D9 /* OfficinaSansExtraBoldC.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 5DB074E0B19641A6B2D78472 /* OfficinaSansExtraBoldC.ttf */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -44,6 +45,7 @@
 		ED297162215061F000B7C4FE /* JavaScriptCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = JavaScriptCore.framework; path = System/Library/Frameworks/JavaScriptCore.framework; sourceTree = SDKROOT; };
 		F7169395675952409EC8FAB8 /* Pods-Helping-HelpingTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Helping-HelpingTests.release.xcconfig"; path = "Target Support Files/Pods-Helping-HelpingTests/Pods-Helping-HelpingTests.release.xcconfig"; sourceTree = "<group>"; };
 		FA4E599FF6E320B9F8C32DA5 /* libPods-Helping-HelpingTests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-Helping-HelpingTests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		5DB074E0B19641A6B2D78472 /* OfficinaSansExtraBoldC.ttf */ = {isa = PBXFileReference; name = "OfficinaSansExtraBoldC.ttf"; path = "../src/assets/fonts/OfficinaSansExtraBoldC.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -122,6 +124,7 @@
 				83CBBA001A601CBA00E9B192 /* Products */,
 				2D16E6871FA4F8E400B85C8A /* Frameworks */,
 				E1C8A13DDA763040F8A49132 /* Pods */,
+				E526FE5980E941A8A4C90315 /* Resources */,
 			);
 			indentWidth = 2;
 			sourceTree = "<group>";
@@ -148,6 +151,15 @@
 			name = Pods;
 			path = Pods;
 			sourceTree = "<group>";
+		};
+		E526FE5980E941A8A4C90315 /* Resources */ = {
+			isa = "PBXGroup";
+			children = (
+				5DB074E0B19641A6B2D78472 /* OfficinaSansExtraBoldC.ttf */,
+			);
+			name = Resources;
+			sourceTree = "<group>";
+			path = "";
 		};
 /* End PBXGroup section */
 
@@ -245,6 +257,7 @@
 			files = (
 				81AB9BB82411601600AC10FF /* LaunchScreen.storyboard in Resources */,
 				13B07FBF1A68108700A75B9A /* Images.xcassets in Resources */,
+				E83220C1D9E243EAAC7A66D9 /* OfficinaSansExtraBoldC.ttf in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
