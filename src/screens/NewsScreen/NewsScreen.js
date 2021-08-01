@@ -1,8 +1,10 @@
-import React, { useLayoutEffect } from 'react';
+import React, { useLayoutEffect, useState } from 'react';
 import { View, TouchableOpacity, Image } from 'react-native';
 import PropTypes from 'prop-types';
 import styles from './styles';
 import { buttonsStyles } from '../../commonStyles/buttons';
+import { Events } from '../../components/Events/Events';
+import { Loader } from '../../components/Loader/Loader';
 
 const NewsScreen = ({ navigation }) => {
   useLayoutEffect(() => {
@@ -17,9 +19,21 @@ const NewsScreen = ({ navigation }) => {
     });
   }, [navigation]);
 
+  const [events, setEvents] = useState([]);
+  const [isLoading, setIsLoading] = useState(true);
+
+  const loadNextPart = () => {};
+
   return (
-    <View>
-      
+    <View style={styles.container}>
+      {isLoading ? (
+        <Loader />
+      ) : (
+        <Events
+          events={events}
+          getNextPart={loadNextPart}
+        />
+      )}
     </View>
   );
 };

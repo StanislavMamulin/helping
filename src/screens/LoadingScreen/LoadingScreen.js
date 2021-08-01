@@ -1,6 +1,6 @@
 import React from 'react';
 import { Image, View, Text } from 'react-native';
-import Loader from '../../components/Loader/Loader';
+import { Loader } from '../../components/Loader/Loader';
 import styles from './styles';
 
 const LoadingScreen = () => {
