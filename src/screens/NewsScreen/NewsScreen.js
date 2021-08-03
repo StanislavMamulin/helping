@@ -21,6 +21,7 @@ const NewsScreen = ({ navigation }) => {
 
   const [events, setEvents] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
+  const [isLoadingMore, setIsLoadingMore] = useState(false);
 
   const loadNextPart = () => {};
 
@@ -32,6 +33,7 @@ const NewsScreen = ({ navigation }) => {
         <Events
           events={events}
           getNextPart={loadNextPart}
+          isLoadingMore={isLoadingMore}
         />
       )}
     </View>
