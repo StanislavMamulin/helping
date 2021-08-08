@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 
 import { colors } from '../../commonStyles/colors';
 
-export const Loader = ({ animating }) => (
+export const Loader = ({ animating = true }) => (
   <ActivityIndicator
     animating={animating}
     color={colors.TURTLE_GREEN}
@@ -13,5 +13,9 @@ export const Loader = ({ animating }) => (
 );
 
 Loader.propTypes = {
-  animating: PropTypes.bool.isRequired,
+  animating: PropTypes.bool,
+};
+
+Loader.defaultProps = {
+  animating: true,
 };

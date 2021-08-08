@@ -1,0 +1,19 @@
+import React from 'react';
+import { TouchableOpacity, Image } from 'react-native';
+import PropTypes from 'prop-types';
+
+import { buttonsStyles } from '../../commonStyles/buttons';
+
+export const HeaderRightButton = ({ type, onPress }) => (
+  <TouchableOpacity
+    hitSlop={{ top: 20, bottom: 20, left: 20, right: 20 }}
+    onPress={onPress}
+  >
+    <Image source={{ uri: type }} style={buttonsStyles.headerRight} />
+  </TouchableOpacity>
+);
+
+HeaderRightButton.propTypes = {
+  type: PropTypes.string.isRequired,
+  onPress: PropTypes.func.isRequired,
+};
