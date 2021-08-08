@@ -85,4 +85,13 @@ export const textStyles = StyleSheet.create({
     textAlign: 'left',
     color: colors.WHITE,
   },
+  TEXT_STYLE_10: {
+    fontFamily: 'Roboto',
+    fontSize: 14,
+    fontWeight: 'normal',
+    fontStyle: 'normal',
+    lineHeight: 20,
+    letterSpacing: 0,
+    color: colors.BLACK_70,
+  },
 });
