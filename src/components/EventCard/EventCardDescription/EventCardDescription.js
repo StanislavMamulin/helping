@@ -28,7 +28,9 @@ export const EventCardDescription = ({ photo, title, description }) => (
 );
 
 EventCardDescription.propTypes = {
-  photo: PropTypes.object.isRequired,
+  photo: PropTypes.shape({
+    uri: PropTypes.string.isRequired,
+  }).isRequired,
   title: PropTypes.string.isRequired,
   description: PropTypes.string.isRequired,
 };
