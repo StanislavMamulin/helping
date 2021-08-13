@@ -1,12 +1,12 @@
-import React, { useLayoutEffect, useState } from 'react';
+import React, { useLayoutEffect, useState, useCallback } from 'react';
 import { FlatList, Text, View } from 'react-native';
 import PropTypes from 'prop-types';
 
 import { HeaderRightButton } from '../../components/HeaderRightButton/HeaderRightButton';
-import { FilterCell } from '../../components/FilterCell/FilterCell';
 import styles from './styles';
 
 import { typesOfHelp } from '../../dataManager/data/typesOfHelp';
+import { FilterItem } from './FilterItem';
 
 const ItemSeparator = () => <View style={styles.separator} />;
 
@@ -41,21 +41,12 @@ export const FilterScreen = ({ navigation, route }) => {
     }
   }, [route.params?.toShow]);
 
-  const renderItem = ({ item }) => {
-    const filterChanged = switchState => {
-      if (switchState === true) {
-        setToShow(filters => [...filters, item]);
-      } else {
-        setToShow(filters => [...filters.filter(type => type !== item)]);
-      }
-    };
-
-    const isEnabled = toShow.includes(item);
-
-    return (
-      <FilterCell isEnabled={isEnabled} title={item} onChange={filterChanged} />
-    );
-  };
+  const renderItem = useCallback(
+    item => (
+      <FilterItem item={item.item} toShow={toShow} setToShow={setToShow} />
+    ),
+    [toShow],
+  );
 
   return (
     <View>
