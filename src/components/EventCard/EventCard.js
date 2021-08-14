@@ -6,10 +6,10 @@ import { EventCardDescription } from './EventCardDescription/EventCardDescriptio
 import { EventCardDate } from './EventCardDate/EventCardDate';
 import { styles } from './styles';
 
-export const EventCard = ({ photo, title, description, date }) => (
+export const EventCard = ({ photo = '', title, description, date }) => (
   <View style={styles.container}>
     <EventCardDescription
-      photo={photo}
+      photo={{ uri: photo }}
       title={title}
       description={description}
     />
@@ -18,7 +18,7 @@ export const EventCard = ({ photo, title, description, date }) => (
 );
 
 EventCard.propTypes = {
-  photo: PropTypes.object.isRequired,
+  photo: PropTypes.string.isRequired,
   title: PropTypes.string.isRequired,
   description: PropTypes.string.isRequired,
   date: PropTypes.shape({

@@ -4,7 +4,11 @@ import PropTypes from 'prop-types';
 
 import { styles } from './styles';
 
-export const EventCardDescription = ({ photo, title, description }) => (
+export const EventCardDescription = ({
+  photo = { uri: '' },
+  title = 'Событие загружается',
+  description = 'Событие загружается',
+}) => (
   <View>
     <View style={styles.photoPart}>
       <ImageBackground
@@ -28,7 +32,9 @@ export const EventCardDescription = ({ photo, title, description }) => (
 );
 
 EventCardDescription.propTypes = {
-  photo: PropTypes.object.isRequired,
+  photo: PropTypes.shape({
+    uri: PropTypes.string.isRequired,
+  }).isRequired,
   title: PropTypes.string.isRequired,
   description: PropTypes.string.isRequired,
 };
