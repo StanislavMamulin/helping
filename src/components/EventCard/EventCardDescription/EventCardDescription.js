@@ -4,7 +4,11 @@ import PropTypes from 'prop-types';
 
 import { styles } from './styles';
 
-export const EventCardDescription = ({ photo, title, description }) => (
+export const EventCardDescription = ({
+  photo = { uri: '' },
+  title = 'Событие загружается',
+  description = 'Событие загружается',
+}) => (
   <View>
     <View style={styles.photoPart}>
       <ImageBackground

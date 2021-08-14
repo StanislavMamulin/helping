@@ -5,7 +5,12 @@ import PropTypes from 'prop-types';
 import { getDateText } from '../../../utils/text';
 import { styles } from './styles';
 
-export const EventCardDate = ({ date }) => (
+export const EventCardDate = ({
+  date = {
+    from: 0,
+    to: 0,
+  },
+}) => (
   <View style={styles.container}>
     <Image source={{ uri: 'icon_calendar' }} style={styles.icon} />
     <Text style={styles.text}>{getDateText(date)}</Text>

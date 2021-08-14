@@ -6,7 +6,7 @@ import { EventCardDescription } from './EventCardDescription/EventCardDescriptio
 import { EventCardDate } from './EventCardDate/EventCardDate';
 import { styles } from './styles';
 
-export const EventCard = ({ photo, title, description, date }) => (
+export const EventCard = ({ photo = '', title, description, date }) => (
   <View style={styles.container}>
     <EventCardDescription
       photo={{ uri: photo }}
