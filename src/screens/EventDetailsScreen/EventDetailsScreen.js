@@ -1,19 +1,14 @@
 import React, { useLayoutEffect } from 'react';
-import { View, TouchableOpacity, Image } from 'react-native';
+import { View } from 'react-native';
 import PropTypes from 'prop-types';
+
+import { HeaderRightButton } from '../../components/HeaderRightButton/HeaderRightButton';
 import styles from './styles';
-import { buttonsStyles } from '../../commonStyles/buttons';
 
 const EventDetailsScreen = ({ navigation }) => {
   useLayoutEffect(() => {
     navigation.setOptions({
-      headerRight: () => (
-        <TouchableOpacity
-          hitSlop={{ top: 20, bottom: 20, left: 20, right: 20 }}
-        >
-          <Image source={{ uri: 'share' }} style={buttonsStyles.headerRight} />
-        </TouchableOpacity>
-      ),
+      headerRight: () => <HeaderRightButton type="share" onPress={() => {}} />,
     });
   }, [navigation]);
 

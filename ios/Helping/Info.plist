@@ -54,6 +54,8 @@
 	<key>UIAppFonts</key>
 	<array>
 		<string>OfficinaSansExtraBoldC.ttf</string>
+		<string>Roboto-Medium.ttf</string>
+		<string>Roboto-Regular.ttf</string>
 	</array>
 </dict>
 </plist>

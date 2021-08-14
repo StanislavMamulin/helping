@@ -1,14 +1,14 @@
 import React from 'react';
 import { createStackNavigator } from '@react-navigation/stack';
 
-import NewsScreen from '../../screens/NewsScreen/NewsScreen';
-import FilterScreen from '../../screens/FilterScreen/FilterScreen';
+import { NewsScreen } from '../../screens/NewsScreen/NewsScreen';
+import { FilterScreen } from '../../screens/FilterScreen/FilterScreen';
 import EventDetailsScreen from '../../screens/EventDetailsScreen/EventDetailsScreen';
 import { headerStyle } from '../styles';
 
 const NewsStack = createStackNavigator();
 
-const NewsStackScreen = () => (
+export const NewsStackScreen = () => (
   <NewsStack.Navigator screenOptions={headerStyle}>
     <NewsStack.Screen
       name="Events"
@@ -23,5 +23,3 @@ const NewsStackScreen = () => (
     />
   </NewsStack.Navigator>
 );
-
-export { NewsStackScreen };
