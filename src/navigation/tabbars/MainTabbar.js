@@ -8,7 +8,7 @@ import { HelpStackScreen } from '../stacks/HelpStack';
 import { HistoryStackScreen } from '../stacks/HistoryStack';
 import { ProfileStackScreen } from '../stacks/ProfileStack';
 
-import HelpIcon from '../../components/HelpIcon/HelpIcon';
+import { HelpIcon } from '../../components/HelpIcon/HelpIcon';
 import { tabbar } from '../../commonStyles/colors';
 
 const getScreenOptions = ({ route }) => ({

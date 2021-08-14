@@ -12,9 +12,5 @@ export const EventsFooter = ({ isLoadingMore = false }) => (
 );
 
 EventsFooter.propTypes = {
-  isLoadingMore: PropTypes.bool,
-};
-
-EventsFooter.defaultProps = {
-  isLoadingMore: false,
+  isLoadingMore: PropTypes.bool.isRequired,
 };

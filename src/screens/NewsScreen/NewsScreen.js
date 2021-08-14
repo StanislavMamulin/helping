@@ -12,7 +12,7 @@ import { Loader } from '../../components/Loader/Loader';
 import { HeaderRightButton } from '../../components/HeaderRightButton/HeaderRightButton';
 import styles from './styles';
 
-import { typesOfHelp } from '../../dataManager/data/typesOfHelp';
+import { TYPES_OF_HELP } from '../../dataManager/data/typesOfHelp';
 
 import { getFirstEvents, getNextEvents } from '../../dataManager/dataManager';
 
@@ -23,7 +23,9 @@ export const NewsScreen = ({ navigation, route }) => {
   const [showedEvents, setShowedEvents] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
   const [isLoadingMore, setIsLoadingMore] = useState(false);
-  const [showEventsTypes, setShowEventsTypes] = useState(new Set(typesOfHelp));
+  const [showEventsTypes, setShowEventsTypes] = useState(
+    new Set(TYPES_OF_HELP),
+  );
   const [noMoreEvents, setNoMoreEvents] = useState(false);
 
   useEffect(() => {
