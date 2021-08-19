@@ -18,10 +18,6 @@ const styles = StyleSheet.create({
 
     paddingLeft: 20,
   },
-  separator: {
-    height: 1,
-    backgroundColor: listColors.separator,
-  },
 });
 
 export default styles;
