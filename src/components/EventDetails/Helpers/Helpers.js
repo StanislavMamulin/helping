@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 
 import styles from './styles';
 
-export const Helping = () => {
+export const Helpers = () => {
 
   return (
     <View>
@@ -12,6 +12,6 @@ export const Helping = () => {
   );
 };
 
-Helping.propTypes = {
+Helpers.propTypes = {
 
 };

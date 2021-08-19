@@ -2,6 +2,7 @@ import React, { useLayoutEffect } from 'react';
 import { View } from 'react-native';
 import PropTypes from 'prop-types';
 
+import { EventDetails } from '../../components/EventDetails/EventDetails';
 import { HeaderRightButton } from '../../components/HeaderRightButton/HeaderRightButton';
 import styles from './styles';
 
@@ -12,10 +13,7 @@ const EventDetailsScreen = ({ navigation }) => {
     });
   }, [navigation]);
 
-  return (
-    <View>
-    </View>
-  );
+  return <EventDetails />;
 };
 
 EventDetailsScreen.propTypes = {

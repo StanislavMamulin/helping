@@ -1,11 +1,14 @@
 import React from 'react';
 import { EventCard } from '../EventCard/EventCard';
 
-export const renderEvent = ({ item: { photo, title, description, date } }) => (
+export const renderEvent = ({
+  item: { titlePhoto, title, description, date, ...details },
+}) => (
   <EventCard
-    photo={photo}
+    titlePhoto={titlePhoto}
     title={title}
     description={description}
     date={date}
+    details={details}
   />
 );

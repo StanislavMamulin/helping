@@ -17,7 +17,7 @@ export const getFirstEventsPart = async count => {
       .get();
 
     if (!eventsDoc.empty) {
-      lastEvent = eventsDoc.docs[eventsDoc.docs.length - 1]; 
+      lastEvent = eventsDoc.docs[eventsDoc.docs.length - 1];
       eventsDoc.forEach(doc => events.push(doc.data()));
     }
 
@@ -43,7 +43,7 @@ export const getNextEventsPart = async count => {
       .get();
 
     if (!eventsDoc.empty) {
-      lastEvent = eventsDoc.docs[eventsDoc.docs.length - 1]; 
+      lastEvent = eventsDoc.docs[eventsDoc.docs.length - 1];
       eventsDoc.forEach(doc => events.push(doc.data()));
     }
 

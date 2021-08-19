@@ -15,7 +15,11 @@ export const NewsStackScreen = () => (
       component={NewsScreen}
       options={() => ({ title: 'Новости' })}
     />
-    <NewsStack.Screen name="EventDetails" component={EventDetailsScreen} />
+    <NewsStack.Screen
+      name="EventDetails"
+      component={EventDetailsScreen}
+      options={() => ({ title: 'Детали события' })}
+    />
     <NewsStack.Screen
       name="FilterScreen"
       component={FilterScreen}
