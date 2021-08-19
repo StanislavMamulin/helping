@@ -3,9 +3,10 @@ import { EventCard } from '../EventCard/EventCard';
 
 export const Event = ({ item: { photo, title, description, date } }) => (
   <EventCard
-    photo={photo}
+    titlePhoto={titlePhoto}
     title={title}
     description={description}
     date={date}
+    details={details}
   />
 );
