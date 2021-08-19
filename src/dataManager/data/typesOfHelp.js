@@ -1,4 +1,4 @@
-export const typesOfHelp = [
+export const TYPES_OF_HELP = [
   'Деньгами',
   'Вещами',
   'Проф. помощью',

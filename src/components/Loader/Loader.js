@@ -15,7 +15,3 @@ export const Loader = ({ animating = true }) => (
 Loader.propTypes = {
   animating: PropTypes.bool,
 };
-
-Loader.defaultProps = {
-  animating: true,
-};

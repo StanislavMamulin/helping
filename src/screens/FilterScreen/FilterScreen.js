@@ -5,7 +5,7 @@ import PropTypes from 'prop-types';
 import { HeaderRightButton } from '../../components/HeaderRightButton/HeaderRightButton';
 import styles from './styles';
 
-import { typesOfHelp } from '../../dataManager/data/typesOfHelp';
+import { TYPES_OF_HELP } from '../../dataManager/data/typesOfHelp';
 import { FilterItem } from './FilterItem';
 import { ItemSeparator } from '../../components/ItemSeparator/ItemSeparator';
 
@@ -51,7 +51,7 @@ export const FilterScreen = ({ navigation, route }) => {
     <View>
       <Text style={styles.title}>Как вы хотите помочь?</Text>
       <FlatList
-        data={typesOfHelp}
+        data={TYPES_OF_HELP}
         renderItem={renderItem}
         style={styles.list}
         keyExtractor={(_item, index) => index}

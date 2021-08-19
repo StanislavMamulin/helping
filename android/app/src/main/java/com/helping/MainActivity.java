@@ -1,4 +1,4 @@
-package com.helping;
+package ru.spm.helping;
 
 import com.facebook.react.ReactActivity;
 

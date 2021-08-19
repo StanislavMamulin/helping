@@ -3,7 +3,7 @@ import { View, Image } from 'react-native';
 import PropTypes from 'prop-types';
 import styles from './styles';
 
-const HelpIcon = ({ focused }) => (
+export const HelpIcon = ({ focused = false }) => (
   <View style={styles().helpIconOutter}>
     <Image source={{ uri: 'shadow' }} style={styles().helpIconShadow} />
     <View style={styles(focused).helpIconInner}>
@@ -13,11 +13,5 @@ const HelpIcon = ({ focused }) => (
 );
 
 HelpIcon.propTypes = {
-  focused: PropTypes.bool,
+  focused: PropTypes.bool.isRequired,
 };
-
-HelpIcon.defaultProps = {
-  focused: false,
-};
-
-export default HelpIcon;

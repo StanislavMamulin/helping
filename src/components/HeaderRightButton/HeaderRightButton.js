@@ -4,11 +4,10 @@ import PropTypes from 'prop-types';
 
 import { buttonsStyles } from '../../commonStyles/buttons';
 
+const TOUCH_AREA = { top: 20, bottom: 20, left: 20, right: 20 };
+
 export const HeaderRightButton = ({ type, onPress }) => (
-  <TouchableOpacity
-    hitSlop={{ top: 20, bottom: 20, left: 20, right: 20 }}
-    onPress={onPress}
-  >
+  <TouchableOpacity hitSlop={TOUCH_AREA} onPress={onPress}>
     <Image source={{ uri: type }} style={buttonsStyles.headerRight} />
   </TouchableOpacity>
 );

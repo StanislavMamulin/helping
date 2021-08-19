@@ -1,4 +1,9 @@
-import React, { useEffect, useLayoutEffect, useState } from 'react';
+import React, {
+  useEffect,
+  useLayoutEffect,
+  useState,
+  useCallback,
+} from 'react';
 import { View } from 'react-native';
 import PropTypes from 'prop-types';
 
@@ -7,14 +12,31 @@ import { Loader } from '../../components/Loader/Loader';
 import { HeaderRightButton } from '../../components/HeaderRightButton/HeaderRightButton';
 import styles from './styles';
 
-import { typesOfHelp } from '../../dataManager/data/typesOfHelp';
+import { TYPES_OF_HELP } from '../../dataManager/data/typesOfHelp';
+
+import { getFirstEvents, getNextEvents } from '../../dataManager/dataManager';
+
+const NUMBER_OF_REQUESTED_EVENTS = 5;
 
 export const NewsScreen = ({ navigation, route }) => {
   const [events, setEvents] = useState([]);
   const [showedEvents, setShowedEvents] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
   const [isLoadingMore, setIsLoadingMore] = useState(false);
-  const [showEventsTypes, setShowEventsTypes] = useState(new Set(typesOfHelp));
+  const [showEventsTypes, setShowEventsTypes] = useState(
+    new Set(TYPES_OF_HELP),
+  );
+  const [noMoreEvents, setNoMoreEvents] = useState(false);
+
+  useEffect(() => {
+    const fetchFirstEvents = async () => {
+      const firstEvents = await getFirstEvents(NUMBER_OF_REQUESTED_EVENTS);
+      setIsLoading(false);
+      setEvents(firstEvents);
+    };
+
+    fetchFirstEvents();
+  }, []);
 
   useLayoutEffect(() => {
     navigation.setOptions({
@@ -48,7 +70,18 @@ export const NewsScreen = ({ navigation, route }) => {
     setShowedEvents(filteredEvents);
   }, [showEventsTypes, events]);
 
-  const loadNextPart = () => {};
+  const loadNextPart = useCallback(async () => {
+    if (!isLoadingMore && !noMoreEvents) {
+      setIsLoadingMore(true);
+      const newEvents = await getNextEvents(NUMBER_OF_REQUESTED_EVENTS);
+      if (newEvents.length === 0) {
+        setNoMoreEvents(true);
+      }
+
+      setEvents([...events, ...newEvents]);
+      setIsLoadingMore(false);
+    }
+  }, [isLoadingMore, noMoreEvents, events]);
 
   return (
     <View style={styles.container}>
