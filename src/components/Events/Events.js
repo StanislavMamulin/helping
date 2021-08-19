@@ -2,14 +2,14 @@ import React from 'react';
 import { View, FlatList } from 'react-native';
 import PropTypes from 'prop-types';
 
-import { renderEvent } from './renderEvent';
+import { Event } from './Event';
 import { EventsFooter } from './EventsFooter/EventsFooter';
 
 export const Events = ({ events, getNextPart, isLoadingMore }) => (
   <View>
     <FlatList
       data={events}
-      renderItem={renderEvent}
+      renderItem={Event}
       keyExtractor={event => event.id}
       onEndReached={getNextPart}
       onEndReachedThreshold={0.9}

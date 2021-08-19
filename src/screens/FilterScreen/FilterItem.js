@@ -1,4 +1,4 @@
-import React, { useCallback } from 'react';
+import React, { useCallback, useMemo } from 'react';
 import { FilterCell } from '../../components/FilterCell/FilterCell';
 
 export const FilterItem = ({ item, setToShow, toShow }) => {
@@ -13,7 +13,7 @@ export const FilterItem = ({ item, setToShow, toShow }) => {
     [item, setToShow],
   );
 
-  const isEnabled = toShow.includes(item);
+  const isEnabled = useMemo(() => toShow.includes(item), [toShow, item]);
 
   return (
     <FilterCell isEnabled={isEnabled} title={item} onChange={filterChanged} />
