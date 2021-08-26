@@ -1,17 +1,29 @@
 import React from 'react';
-import { View } from 'react-native';
+import { Image, View } from 'react-native';
 import PropTypes from 'prop-types';
 
 import styles from './styles';
 
-export const Photos = () => {
+const renderEventPhotos = (photos = []) =>
+  photos.map((photoURL, index) => {
+    const additionalMargin = index === 0 ? { marginBottom: 10 } : {};
+    return (
+      <Image
+        key={photoURL}
+        source={{ uri: photoURL }}
+        style={[styles.eventPhoto, additionalMargin]}
+      />
+    );
+  });
 
-  return (
-    <View>
-    </View>
-  );
-};
+export const Photos = ({ photos: { titlePhoto = '', eventPhotos = [] } }) => (
+  <View style={styles.container}>
+    <Image source={{ uri: titlePhoto }} style={styles.titlePhoto} />
+    <View style={styles.eventPhotos}>{renderEventPhotos(eventPhotos)}</View>
+  </View>
+);
 
 Photos.propTypes = {
-
+  titlePhoto: PropTypes.string.isRequired,
+  eventPhotos: PropTypes.arrayOf(PropTypes.string).isRequired,
 };

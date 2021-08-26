@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useCallback } from 'react';
 import { TouchableOpacity } from 'react-native';
 import PropTypes from 'prop-types';
 import { useNavigation } from '@react-navigation/native';
@@ -16,22 +16,23 @@ export const EventCard = ({
 }) => {
   const navigation = useNavigation();
 
+  const goToDetails = useCallback(
+    () =>
+      navigation.navigate({
+        name: 'EventDetails',
+        params: {
+          titlePhoto,
+          title,
+          description,
+          date,
+          details,
+        },
+      }),
+    [navigation, titlePhoto, title, description, date, details],
+  );
+
   return (
-    <TouchableOpacity
-      style={styles.container}
-      onPress={() =>
-        navigation.navigate({
-          name: 'EventDetails',
-          params: {
-            title,
-            description,
-            date,
-            titlePhoto,
-            details,
-          },
-        })
-      }
-    >
+    <TouchableOpacity style={styles.container} onPress={goToDetails}>
       <EventCardDescription
         photo={{ uri: titlePhoto }}
         title={title}
