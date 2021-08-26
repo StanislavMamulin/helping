@@ -5,7 +5,7 @@ import PropTypes from 'prop-types';
 import { HeaderRightButton } from '../../components/HeaderRightButton/HeaderRightButton';
 import styles from './styles';
 
-const ProfileScreen = ({ navigation }) => {
+export const ProfileScreen = ({ navigation }) => {
   useLayoutEffect(() => {
     navigation.setOptions({
       headerRight: () => <HeaderRightButton type="edit" onPress={() => {}} />,
@@ -24,5 +24,3 @@ ProfileScreen.propTypes = {
     navigate: PropTypes.func.isRequired,
   }).isRequired,
 };
-
-export default ProfileScreen;
