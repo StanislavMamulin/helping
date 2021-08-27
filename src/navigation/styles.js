@@ -1,6 +1,8 @@
+import { colors } from '../commonStyles/colors';
+
 const headerStyle = {
   headerStyle: {
-    backgroundColor: '#66a636',
+    backgroundColor: colors.LEAF,
   },
   headerTintColor: 'white',
   headerTitleStyle: {

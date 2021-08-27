@@ -3,6 +3,7 @@ import { Text, View, Linking, ScrollView } from 'react-native';
 import { useNavigation, useRoute } from '@react-navigation/native';
 
 import styles from './styles';
+import { HeaderWithFadeTitle } from '../HeaderWithFadeTitle/HeaderWithFadeTitle';
 import { EventCardDate } from '../EventCard/EventCardDate/EventCardDate';
 import { Photos } from './Photos/Photos';
 import { Helpers } from './Helpers/Helpers';
@@ -18,7 +19,7 @@ export const EventDetails = () => {
   useLayoutEffect(() => {
     if (route.params?.title) {
       navigation.setOptions({
-        title: route.params?.title,
+        headerTitle: () => <HeaderWithFadeTitle title={route.params?.title} />,
       });
     }
   }, [navigation, route.params?.title]);
