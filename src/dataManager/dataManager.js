@@ -1,8 +1,8 @@
-import { getFirstEventsPart, getNextEventsPart } from './firebase/firebase';
+import { getPartOfEvents } from './firebase/firebase';
 
 export const getFirstEvents = async count => {
   try {
-    const events = await getFirstEventsPart(count);
+    const events = await getPartOfEvents({ firstPart: true, count });
 
     return events;
   } catch (err) {
@@ -13,7 +13,7 @@ export const getFirstEvents = async count => {
 
 export const getNextEvents = async count => {
   try {
-    const events = await getNextEventsPart(count);
+    const events = await getPartOfEvents({ firstPart: false, count });
 
     return events;
   } catch (err) {
