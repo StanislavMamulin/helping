@@ -1,5 +1,4 @@
 import { StyleSheet } from 'react-native';
-import { textStyles } from '../../../commonStyles/text';
 
 const styles = StyleSheet.create({
   container: {
@@ -9,19 +8,6 @@ const styles = StyleSheet.create({
     backgroundColor: 'white',
     borderTopColor: '#d8d8d8',
     borderTopWidth: 1,
-  },
-  button: {
-    flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-  },
-  icon: {
-    width: 24,
-    height: 24,
-    marginBottom: 7,
-  },
-  label: {
-    ...textStyles.TEXT_STYLE_HELP_BUTTON,
   },
   separator: {
     width: 1,
