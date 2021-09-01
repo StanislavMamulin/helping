@@ -10,10 +10,11 @@ export const EventCardDate = ({
     from: 0,
     to: 0,
   },
+  theme: { container = {}, text = {}, icon = {} } = {},
 }) => (
-  <View style={styles.container}>
-    <Image source={{ uri: 'icon_calendar' }} style={styles.icon} />
-    <Text style={styles.text}>{getDateText(date)}</Text>
+  <View style={[styles.container, container]}>
+    <Image source={{ uri: 'icon_calendar' }} style={[styles.icon, icon]} />
+    <Text style={[styles.text, text]}>{getDateText(date)}</Text>
   </View>
 );
 

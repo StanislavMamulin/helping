@@ -3,48 +3,82 @@ import startOfToday from 'date-fns/startOfToday';
 
 let lastEvent;
 
-export const getFirstEventsPart = async count => {
-  const events = [];
-  const today = startOfToday().getTime();
-
+const getNKOData = async nko => {
   try {
-    const eventsDoc = await firestore()
-      .collection('Events')
-      .where('date.to', '>=', today)
-      .orderBy('date.to')
-      .orderBy('dateAdded', 'desc')
-      .limit(count)
-      .get();
+    const nkoSnapshot = await firestore().doc(nko.path).get();
 
-    if (!eventsDoc.empty) {
-      lastEvent = eventsDoc.docs[eventsDoc.docs.length - 1]; 
-      eventsDoc.forEach(doc => events.push(doc.data()));
-    }
-
-    return events;
+    return nkoSnapshot.data();
   } catch (err) {
     console.error(err);
-    return events;
+    return {};
   }
 };
 
-export const getNextEventsPart = async count => {
-  const events = [];
-
+const getHelpersData = async helpers => {
   try {
-    const today = startOfToday().getTime();
-    const eventsDoc = await firestore()
+    const helpersPromises = helpers.map(userRef =>
+      firestore()
+        .doc(userRef.path)
+        .get()
+    );
+    const helpersSnapshots = await Promise.all(helpersPromises);
+
+    return helpersSnapshots.map(docSnapshot => docSnapshot.data());
+  } catch (err) {
+    console.error(err);
+    return [];
+  }
+};
+
+const getPartQuery = ({ firstPart = true, count = 0 }) => {
+  const today = startOfToday().getTime();
+
+  if (firstPart) {
+    return firestore()
       .collection('Events')
       .where('date.to', '>=', today)
       .orderBy('date.to')
       .orderBy('dateAdded', 'desc')
-      .startAfter(lastEvent.data().date.to)
-      .limit(count)
-      .get();
+      .limit(count);
+  }
+
+  return firestore()
+    .collection('Events')
+    .where('date.to', '>=', today)
+    .orderBy('date.to')
+    .orderBy('dateAdded', 'desc')
+    .startAfter(lastEvent.data().date.to)
+    .limit(count);
+};
+
+export const getPartOfEvents = async ({ firstPart, count = 0 }) => {
+  const events = [];
+  const firebaseQuery = getPartQuery({ firstPart, count });
+
+  try {
+    const eventsDoc = await firebaseQuery.get();
 
     if (!eventsDoc.empty) {
-      lastEvent = eventsDoc.docs[eventsDoc.docs.length - 1]; 
-      eventsDoc.forEach(doc => events.push(doc.data()));
+      lastEvent = eventsDoc.docs[eventsDoc.docs.length - 1];
+
+      const eventData = [];
+      eventsDoc.forEach(docSnapshot => {
+        eventData.push(docSnapshot.data());
+      });
+
+      // объединение данных из разных коллекций
+      const eventsDataPromises = eventData.map(async event => {
+        const helpers = await getHelpersData(event.helpers);
+        const nko = await getNKOData(event.nko);
+
+        events.push({
+          ...event,
+          helpers,
+          nko,
+        });
+      });
+
+      await Promise.all(eventsDataPromises);
     }
 
     return events;

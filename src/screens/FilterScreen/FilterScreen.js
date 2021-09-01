@@ -7,8 +7,7 @@ import styles from './styles';
 
 import { TYPES_OF_HELP } from '../../dataManager/data/typesOfHelp';
 import { FilterItem } from './FilterItem';
-
-const ItemSeparator = () => <View style={styles.separator} />;
+import { ItemSeparator } from '../../components/ItemSeparator/ItemSeparator';
 
 const goToPrevScreenWithFilter = (navigation, toShow) => {
   navigation.navigate({
