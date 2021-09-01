@@ -21,7 +21,8 @@ export const Events = ({ events, getNextPart, isLoadingMore }) => (
 Events.propTypes = {
   events: PropTypes.arrayOf(
     PropTypes.shape({
-      photo: PropTypes.string.isRequired,
+      id: PropTypes.string.isRequired,
+      titlePhoto: PropTypes.string.isRequired,
       title: PropTypes.string.isRequired,
       description: PropTypes.string.isRequired,
       date: PropTypes.shape({
