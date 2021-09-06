@@ -1,22 +1,13 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { View } from 'react-native';
-import PropTypes from 'prop-types';
 
 import { BlankSearch } from '../BlankSearch/BlankSearch';
 import { styles } from './styles';
 
 import { firstHint, secondHint } from './data';
 
-export const SearchNKO = ({ navigation }) => {
+export const SearchNKO = () => {
   const [findedNKO, setFindedNKO] = useState([]);
-
-  useEffect(() => {
-    const unsubscribe = navigation.addListener('tabPress', e => {
-      
-    });
-
-    return unsubscribe;
-  });
 
   return (
     <View style={styles.container}>
@@ -27,8 +18,4 @@ export const SearchNKO = ({ navigation }) => {
       )}
     </View>
   );
-};
-
-SearchNKO.propTypes = {
-  navigation: PropTypes.object.isRequired,
 };
