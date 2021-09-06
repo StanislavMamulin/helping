@@ -22,6 +22,7 @@ export const colors = {
   BLACK: '#000000',
   BLACK_12: '#0000001e',
   BLACK_20: '#00000033',
+  BLACK_24: '#0000003d',
   BLACK_35: '#00000059',
   BLACK_38: '#00000060',
   BLACK_40: '#00000066',
