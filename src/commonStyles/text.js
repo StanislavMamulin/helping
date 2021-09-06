@@ -141,4 +141,14 @@ export const textStyles = StyleSheet.create({
     letterSpacing: 0,
     color: colors.BLACK_54,
   },
+  TEXT_STYLE_SEARCH_TEXT: {
+    fontFamily: 'Roboto',
+    fontSize: 14,
+    fontWeight: 'normal',
+    fontStyle: 'normal',
+    lineHeight: 20,
+    letterSpacing: 0,
+    textAlign: 'left',
+    color: colors.BLACK_87,
+  },
 });
