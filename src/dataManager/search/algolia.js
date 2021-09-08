@@ -9,6 +9,12 @@ let prevSearchString = '';
 let totalPage = 1;
 let currentPage = 0;
 
+const resetSearchState = () => {
+  prevSearchString = '';
+  totalPage = 1;
+  currentPage = 0;
+};
+
 const finder = async ({
   type = 'eventsTitles',
   searchString = '',
@@ -17,9 +23,8 @@ const finder = async ({
   const searchType = type === 'eventsTitles' ? 'title' : 'nko.title';
 
   if (prevSearchString !== searchString) {
+    resetSearchState();
     prevSearchString = searchString;
-    totalPage = 1;
-    currentPage = 0;
   }
   if (currentPage >= totalPage) {
     return [];
@@ -55,4 +60,8 @@ export const findByEventsTitle = async ({ searchString = '', count = 0 }) => {
 export const findByNKOTitle = async ({ searchString = '', count = 0 }) => {
   const eventsIDs = await finder({ type: 'nkoTitle', searchString, count });
   return eventsIDs;
+};
+
+export const clearSearchState = () => {
+  resetSearchState();
 };

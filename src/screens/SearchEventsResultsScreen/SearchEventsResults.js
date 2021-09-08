@@ -3,7 +3,7 @@ import { View } from 'react-native';
 import { useRoute } from '@react-navigation/native';
 
 import { EventsScreen } from '../EventsScreen/EventsScreen';
-import { findEventsByTitle } from '../../dataManager/dataManager';
+import { findEventsByTitle } from '../../dataManager/searchManager';
 import styles from './styles';
 
 export const SearchEventsResults = () => {

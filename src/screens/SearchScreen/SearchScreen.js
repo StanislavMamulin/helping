@@ -1,6 +1,6 @@
 import React, { useCallback, useLayoutEffect, useState } from 'react';
 import { View, Text } from 'react-native';
-
+import { useFocusEffect } from '@react-navigation/native';
 import PropTypes from 'prop-types';
 
 import { SearchTabbar } from '../../navigation/tabbars/SearchTabbar/SearchTabbar';
@@ -9,6 +9,7 @@ import { HeaderWithSearchField } from '../../components/HeaderWithSearchField/He
 
 import { getPlaceholderByType } from './data';
 import { TYPES_OF_SEARCH } from '../../dataManager/data/typesOfSearch';
+import { resetSearch } from '../../dataManager/searchManager';
 import styles from './styles';
 
 export const SearchScreen = ({ navigation }) => {
@@ -58,6 +59,16 @@ export const SearchScreen = ({ navigation }) => {
     showSearchField,
     onSearchPressed,
   ]);
+
+  // Reset search when returning from a search results page
+  useFocusEffect(
+    useCallback(() => {
+      return () => {
+        setSearchText('');
+        resetSearch();
+      };
+    }, []),
+  );
 
   const tabChanged = useCallback(type => {
     setActiveSearchType(type);
