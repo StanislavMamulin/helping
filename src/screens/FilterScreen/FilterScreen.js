@@ -10,8 +10,11 @@ import { FilterItem } from './FilterItem';
 import { ItemSeparator } from '../../components/ItemSeparator/ItemSeparator';
 
 const goToPrevScreenWithFilter = (navigation, toShow) => {
+  const { index, routeNames } = navigation.getState();
+  const prevScreenName = routeNames[index - 1];
+
   navigation.navigate({
-    name: 'Events',
+    name: prevScreenName,
     params: { toShow },
     merge: true,
   });

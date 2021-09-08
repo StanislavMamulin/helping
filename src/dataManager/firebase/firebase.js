@@ -94,7 +94,22 @@ export const getEventsByIDs = async IDs => {
   try {
     const eventsSnapshots = await Promise.all(eventsPromises);
 
-    return eventsSnapshots.map(eventSnapshot => eventSnapshot.data());
+    const eventsDataPromises = eventsSnapshots.map(async eventSnapshot => {
+      const eventData = eventSnapshot.data();
+      const helpers = await getHelpersData(eventData.helpers);
+      const nko = await getNKOData(eventData.nko.nkoRef);
+      const event = {
+        ...eventData,
+        helpers,
+        nko,
+      };
+
+      return event;
+    });
+
+    const events = await Promise.all(eventsDataPromises);
+
+    return events;
   } catch (err) {
     console.error(err);
     return [];

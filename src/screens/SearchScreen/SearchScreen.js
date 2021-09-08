@@ -18,6 +18,16 @@ export const SearchScreen = ({ navigation }) => {
   );
   const [searchText, setSearchText] = useState('');
 
+  const onSearchPressed = useCallback(
+    ({ nativeEvent: { text } }) => {
+      navigation.navigate({
+        name: 'SearchEventsResults',
+        params: { title: text },
+      });
+    },
+    [navigation],
+  );
+
   useLayoutEffect(() => {
     navigation.setOptions({
       headerRight: () =>
@@ -35,12 +45,19 @@ export const SearchScreen = ({ navigation }) => {
             placeholder={getPlaceholderByType(activeSearchType)}
             onChangeText={text => setSearchText(text)}
             searchText={searchText}
+            onSearchPressed={onSearchPressed}
           />
         ) : (
           <Text style={styles.headerTitle}>Поиск</Text>
         ),
     });
-  }, [navigation, searchText, activeSearchType, showSearchField]);
+  }, [
+    navigation,
+    searchText,
+    activeSearchType,
+    showSearchField,
+    onSearchPressed,
+  ]);
 
   const tabChanged = useCallback(type => {
     setActiveSearchType(type);

@@ -1,6 +1,8 @@
 import algoliasearch from 'algoliasearch';
 
-const client = algoliasearch('V9WUY9IQ3K', 'b0042986cdaad3bbf862aed7cbde2026');
+const SEARCH_KEY = 'b0042986cdaad3bbf862aed7cbde2026';
+const ALGOLIA_APP_ID = 'V9WUY9IQ3K';
+const client = algoliasearch(ALGOLIA_APP_ID, SEARCH_KEY);
 const index = client.initIndex('HelperEvents');
 
 let prevSearchString = '';
