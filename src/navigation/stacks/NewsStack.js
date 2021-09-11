@@ -10,7 +10,7 @@ const NewsStack = createStackNavigator();
 export const NewsStackScreen = () => (
   <NewsStack.Navigator screenOptions={headerStyle}>
     <NewsStack.Screen
-      name="Events"
+      name="NewsScreen"
       component={NewsScreen}
       options={() => ({ title: 'Новости' })}
     />
