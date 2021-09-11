@@ -7,11 +7,18 @@ import { SafeAreaProvider } from 'react-native-safe-area-context';
 import { MainScreen } from './src/navigation/Navigation';
 import { LoadingScreen } from './src/screens/LoadingScreen/LoadingScreen';
 
+import { firebaseSignInAnonymously } from './src/dataManager/firebase/auth';
+
 const App = () => {
   const [isLoading, setIsLoading] = useState(true);
   const isDarkMode = useColorScheme() === 'dark';
 
-  const initApp = () => {
+  const initApp = async () => {
+    try {
+      await firebaseSignInAnonymously();
+    } catch (err) {
+      console.error(err);
+    }
     setTimeout(() => {
       setIsLoading(false);
     }, 2000);

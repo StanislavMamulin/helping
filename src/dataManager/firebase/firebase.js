@@ -69,7 +69,7 @@ export const getPartOfEvents = async ({ firstPart, count = 0 }) => {
       // объединение данных из разных коллекций
       const eventsDataPromises = eventData.map(async event => {
         const helpers = await getHelpersData(event.helpers);
-        const nko = await getNKOData(event.nko);
+        const nko = await getNKOData(event.nko.nkoRef);
 
         events.push({
           ...event,
@@ -85,5 +85,33 @@ export const getPartOfEvents = async ({ firstPart, count = 0 }) => {
   } catch (err) {
     console.error(err);
     return events;
+  }
+};
+
+export const getEventsByIDs = async IDs => {
+  const eventsPromises = IDs.map(id => firestore().doc(`Events/${id}`).get());
+
+  try {
+    const eventsSnapshots = await Promise.all(eventsPromises);
+
+    const eventsDataPromises = eventsSnapshots.map(async eventSnapshot => {
+      const eventData = eventSnapshot.data();
+      const helpers = await getHelpersData(eventData.helpers);
+      const nko = await getNKOData(eventData.nko.nkoRef);
+      const event = {
+        ...eventData,
+        helpers,
+        nko,
+      };
+
+      return event;
+    });
+
+    const events = await Promise.all(eventsDataPromises);
+
+    return events;
+  } catch (err) {
+    console.error(err);
+    return [];
   }
 };

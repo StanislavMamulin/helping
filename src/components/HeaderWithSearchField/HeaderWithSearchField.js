@@ -8,6 +8,7 @@ export const HeaderWithSearchField = ({
   placeholder = '',
   onChangeText = () => {},
   searchText = '',
+  onSearchPressed = () => {},
 }) => (
   <View style={styles.container}>
     <Image source={{ uri: 'find' }} style={styles.icons} />
@@ -19,6 +20,7 @@ export const HeaderWithSearchField = ({
       returnKeyType="search"
       style={[styles.searchText, styles.searchField]}
       autoFocus
+      onSubmitEditing={onSearchPressed}
     />
     <Image source={{ uri: 'mic' }} style={styles.icons} />
   </View>
