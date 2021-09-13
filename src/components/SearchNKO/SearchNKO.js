@@ -6,14 +6,15 @@ import { BlankSearch } from '../BlankSearch/BlankSearch';
 import { styles } from './styles';
 
 import { firstHint, secondHint } from './data';
+import { SearchNKOResults } from '../SearchNKOResults/SearchNKOResults';
 
-export const SearchNKO = ({ onExamplePress }) => {
+export const SearchNKO = ({ onExamplePress, searchTextNKO }) => {
   const [findedNKO, setFindedNKO] = useState([]);
 
   return (
     <View style={styles.container}>
       {findedNKO.length ? (
-        <View />
+        <SearchNKOResults findedNKO={findedNKO} keyWords={searchTextNKO} />
       ) : (
         <BlankSearch
           firstHint={firstHint}
@@ -27,4 +28,5 @@ export const SearchNKO = ({ onExamplePress }) => {
 
 SearchNKO.propTypes = {
   onExamplePress: PropTypes.func.isRequired,
+  searchTextNKO: PropTypes.string.isRequired,
 };

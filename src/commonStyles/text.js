@@ -94,6 +94,15 @@ export const textStyles = StyleSheet.create({
     letterSpacing: 0,
     color: colors.BLACK_70,
   },
+  TEXT_STYLE_13: {
+    fontFamily: 'Roboto',
+    fontSize: 14,
+    fontWeight: 'normal',
+    fontStyle: 'normal',
+    lineHeight: 20,
+    letterSpacing: 0,
+    color: colors.BLACK_54,
+  },
   TEXT_STYLE_NKO_TITLE: {
     fontFamily: 'Roboto',
     fontSize: 12,

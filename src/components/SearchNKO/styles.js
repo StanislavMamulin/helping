@@ -7,7 +7,5 @@ export const styles = StyleSheet.create({
   image: {
     width: 188,
     height: 188,
-    borderWidth: 1,
-    borderColor: 'red',
   },
 });

@@ -18,6 +18,7 @@ export const SearchScreen = ({ navigation }) => {
     TYPES_OF_SEARCH.eventsTitle,
   );
   const [searchText, setSearchText] = useState('');
+  const [searchTextNKO, setSearchTextNKO] = useState('');
 
   const onSearchPressed = useCallback(
     ({ nativeEvent: { text } }) => {
@@ -64,6 +65,7 @@ export const SearchScreen = ({ navigation }) => {
     setSearchText('');
     resetSearch();
   }, []);
+
   // Reset search when returning from a search results page
   useFocusEffect(
     useCallback(() => {
@@ -88,7 +90,11 @@ export const SearchScreen = ({ navigation }) => {
 
   return (
     <View style={styles.container}>
-      <SearchTabbar tabChanged={tabChanged} onExamplePress={onExamplePress} />
+      <SearchTabbar
+        tabChanged={tabChanged}
+        onExamplePress={onExamplePress}
+        searchTextNKO={searchTextNKO}
+      />
     </View>
   );
 };
