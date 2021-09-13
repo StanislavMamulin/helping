@@ -9,7 +9,7 @@ import { TYPES_OF_SEARCH } from '../../../dataManager/data/typesOfSearch';
 
 const SearchTabs = createMaterialTopTabNavigator();
 
-export const SearchTabbar = ({ tabChanged }) => (
+export const SearchTabbar = ({ tabChanged, onExamplePress }) => (
   <SearchTabs.Navigator
     tabBarOptions={{
       labelStyle: { ...styles.tabText, textTransform: 'none' },
@@ -20,23 +20,25 @@ export const SearchTabbar = ({ tabChanged }) => (
   >
     <SearchTabs.Screen
       name="SearchEvents"
-      component={SearchEvents}
       options={{ title: 'По мероприятиям' }}
       listeners={{
         focus: () => {
           tabChanged(TYPES_OF_SEARCH.eventsTitle);
         },
       }}
-    />
+    >
+      {() => <SearchEvents onExamplePress={onExamplePress} />}
+    </SearchTabs.Screen>
     <SearchTabs.Screen
       name="SearchNKO"
-      component={SearchNKO}
       options={{ title: 'По НКО' }}
       listeners={{
         focus: () => {
           tabChanged(TYPES_OF_SEARCH.nkoTitle);
         },
       }}
-    />
+    >
+      {() => <SearchNKO onExamplePress={onExamplePress} />}
+    </SearchTabs.Screen>
   </SearchTabs.Navigator>
 );

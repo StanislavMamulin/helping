@@ -60,23 +60,35 @@ export const SearchScreen = ({ navigation }) => {
     onSearchPressed,
   ]);
 
+  const resetSearchState = useCallback(() => {
+    setSearchText('');
+    resetSearch();
+  }, []);
   // Reset search when returning from a search results page
   useFocusEffect(
     useCallback(() => {
       return () => {
-        setSearchText('');
-        resetSearch();
+        resetSearchState();
       };
-    }, []),
+    }, [resetSearchState]),
   );
 
-  const tabChanged = useCallback(type => {
-    setActiveSearchType(type);
+  const onExamplePress = useCallback(text => {
+    setShowSearchField(true);
+    setSearchText(text);
   }, []);
+
+  const tabChanged = useCallback(
+    type => {
+      setActiveSearchType(type);
+      resetSearchState();
+    },
+    [resetSearchState],
+  );
 
   return (
     <View style={styles.container}>
-      <SearchTabbar tabChanged={tabChanged} />
+      <SearchTabbar tabChanged={tabChanged} onExamplePress={onExamplePress} />
     </View>
   );
 };
