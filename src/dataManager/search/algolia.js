@@ -3,7 +3,8 @@ import algoliasearch from 'algoliasearch';
 const SEARCH_KEY = 'b0042986cdaad3bbf862aed7cbde2026';
 const ALGOLIA_APP_ID = 'V9WUY9IQ3K';
 const client = algoliasearch(ALGOLIA_APP_ID, SEARCH_KEY);
-const index = client.initIndex('HelperEvents');
+const eventIndex = client.initIndex('HelperEvents');
+const nkoIndex = client.initIndex('NKOTitle');
 
 let prevSearchString = '';
 let totalPage = 1;
@@ -15,7 +16,31 @@ const resetSearchState = () => {
   currentPage = 0;
 };
 
-const finder = async ({
+const findNKO = async (nkoTitle = '') => {
+  if (prevSearchString !== nkoTitle) {
+    resetSearchState();
+    prevSearchString = nkoTitle;
+  }
+  if (nkoTitle === '') {
+    return [];
+  }
+
+  try {
+    const searchResponse = await nkoIndex.search(nkoTitle, {
+      restrictSearchableAttributes: ['title'],
+      attributesToRetrieve: ['title'],
+    });
+
+    const { hits } = searchResponse;
+
+    return hits.map(result => result.title);
+  } catch (err) {
+    console.error(err);
+    return [];
+  }
+};
+
+const findEvents = async ({
   type = 'eventsTitles',
   searchString = '',
   count = 0,
@@ -34,14 +59,14 @@ const finder = async ({
   }
 
   try {
-    const findedEventsIDs = await index.search(searchString, {
+    const searchResponse = await eventIndex.search(searchString, {
       restrictSearchableAttributes: [searchType],
       attributesToRetrieve: ['objectID'],
       hitsPerPage: count,
       page: currentPage,
     });
 
-    const { nbPages, hits } = findedEventsIDs;
+    const { nbPages, hits } = searchResponse;
     totalPage = nbPages;
     currentPage += 1;
 
@@ -53,13 +78,29 @@ const finder = async ({
 };
 
 export const findByEventsTitle = async ({ searchString = '', count = 0 }) => {
-  const eventsIDs = await finder({ type: 'eventsTitles', searchString, count });
+  const eventsIDs = await findEvents({
+    type: 'eventsTitles',
+    searchString,
+    count,
+  });
+
   return eventsIDs;
 };
 
 export const findByNKOTitle = async ({ searchString = '', count = 0 }) => {
-  const eventsIDs = await finder({ type: 'nkoTitle', searchString, count });
+  const eventsIDs = await findEvents({
+    type: 'nkoTitles',
+    searchString,
+    count,
+  });
+
   return eventsIDs;
+};
+
+export const searchNKOByTitle = async nkoTitle => {
+  const NKOTitles = await findNKO(nkoTitle);
+
+  return NKOTitles;
 };
 
 export const clearSearchState = () => {
