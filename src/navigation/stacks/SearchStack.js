@@ -3,7 +3,7 @@ import { createStackNavigator } from '@react-navigation/stack';
 
 import { SearchScreen } from '../../screens/SearchScreen/SearchScreen';
 import { FilterScreen } from '../../screens/FilterScreen/FilterScreen';
-import { SearchEventsResults } from '../../screens/SearchEventsResultsScreen/SearchEventsResults';
+import { SearchEventsResultScreen } from '../../screens/SearchEventsResultScreen/SearchEventsResultScreen';
 import { headerStyle } from '../styles';
 
 const SearchStack = createStackNavigator();
@@ -23,8 +23,8 @@ const SearchStackScreen = () => (
       }}
     />
     <SearchStack.Screen
-      name="SearchEventsResults"
-      component={SearchEventsResults}
+      name="SearchEventsResult"
+      component={SearchEventsResultScreen}
       options={{ title: 'События' }}
     />
     <SearchStack.Screen

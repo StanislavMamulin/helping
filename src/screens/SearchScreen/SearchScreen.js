@@ -22,12 +22,21 @@ export const SearchScreen = ({ navigation }) => {
 
   const onSearchPressed = useCallback(
     ({ nativeEvent: { text } }) => {
-      navigation.navigate({
-        name: 'SearchEventsResults',
-        params: { title: text },
-      });
+      if (activeSearchType === TYPES_OF_SEARCH.eventsTitle) {
+        // search by events title
+        navigation.navigate({
+          name: 'SearchEventsResult',
+          params: {
+            title: text,
+            type: TYPES_OF_SEARCH.eventsTitle,
+          },
+        });
+      } else {
+        // search by nko title
+        setSearchTextNKO(text);
+      }
     },
-    [navigation],
+    [navigation, activeSearchType],
   );
 
   useLayoutEffect(() => {
@@ -66,13 +75,15 @@ export const SearchScreen = ({ navigation }) => {
     resetSearch();
   }, []);
 
-  // Reset search when returning from a search results page
+  // Reset search when returning from a search results page (by events title)
   useFocusEffect(
     useCallback(() => {
       return () => {
-        resetSearchState();
+        if (activeSearchType === TYPES_OF_SEARCH.eventsTitle) {
+          resetSearchState();
+        }
       };
-    }, [resetSearchState]),
+    }, [resetSearchState, activeSearchType]),
   );
 
   const onExamplePress = useCallback(text => {
@@ -83,6 +94,7 @@ export const SearchScreen = ({ navigation }) => {
   const tabChanged = useCallback(
     type => {
       setActiveSearchType(type);
+      setSearchTextNKO('');
       resetSearchState();
     },
     [resetSearchState],

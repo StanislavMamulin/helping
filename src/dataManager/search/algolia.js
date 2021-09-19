@@ -64,6 +64,7 @@ const findEvents = async ({
       attributesToRetrieve: ['objectID'],
       hitsPerPage: count,
       page: currentPage,
+      optionalWords: searchString,
     });
 
     const { nbPages, hits } = searchResponse;

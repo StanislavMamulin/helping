@@ -1,18 +1,18 @@
 import React from 'react';
-import { Image, Text, View } from 'react-native';
+import { Image, Text, TouchableOpacity } from 'react-native';
 import PropTypes from 'prop-types';
 
 import { styles } from './styles';
 
-export const ListItemTextWithChevron = ({ item }) => (
-  <View style={styles.container}>
+export const ListItemTextWithChevron = ({ text, onPress }) => (
+  <TouchableOpacity style={styles.container} onPress={() => onPress(text)}>
     <Text numberOfLines={1} style={styles.text}>
-      {item}
+      {text}
     </Text>
     <Image source={{ uri: 'icon_chevron_right' }} style={styles.chevronIcon} />
-  </View>
+  </TouchableOpacity>
 );
 
 ListItemTextWithChevron.propTypes = {
-  item: PropTypes.string.isRequired,
+  text: PropTypes.string.isRequired,
 };

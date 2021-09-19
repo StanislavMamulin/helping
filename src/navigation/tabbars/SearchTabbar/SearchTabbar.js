@@ -34,7 +34,7 @@ export const SearchTabbar = ({ tabChanged, onExamplePress, searchTextNKO }) => (
       name="SearchNKO"
       options={{ title: 'По НКО' }}
       listeners={{
-        focus: () => {
+        tabPress: () => {
           tabChanged(TYPES_OF_SEARCH.nkoTitle);
         },
       }}
