@@ -1,5 +1,6 @@
 /* eslint-disable no-console */
 import auth from '@react-native-firebase/auth';
+import { getFacebookAccessToken } from '../socialAuthManager';
 
 export const firebaseSignInAnonymously = async () => {
   try {
@@ -50,5 +51,23 @@ export const signOut = async () => {
     console.log('User signed out!');
   } catch (err) {
     console.error(err);
+  }
+};
+
+export const signInWithFB = async () => {
+  try {
+    const fbAccessToken = await getFacebookAccessToken();
+
+    // Create a Firebase credential with the AccessToken
+    const facebookCredential =
+      auth.FacebookAuthProvider.credential(fbAccessToken);
+
+    // Sign-in the user with the credential
+    return (
+      await auth().signInWithCredential(facebookCredential)
+    ).user.toJSON();
+  } catch (err) {
+    console.error(err);
+    return null;
   }
 };

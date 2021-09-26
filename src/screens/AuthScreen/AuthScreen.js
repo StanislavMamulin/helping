@@ -7,7 +7,7 @@ import { InputField } from '../../components/InputFields/InputField/InputField';
 import { ButtonThemed } from '../../components/ButtonThemed/ButtonThemed';
 import { LinkThemed } from '../../components/LinkThemed/LinkThemed';
 
-import { signIn } from '../../redux/userSlice';
+import { signIn, signInWithFacebook } from '../../redux/userSlice';
 
 import { styles } from './styles';
 import { PasswordField } from '../../components/InputFields/PasswordField/PasswordField';
@@ -20,7 +20,18 @@ export const AuthScreen = () => {
 
   const handleForgotPasswordPress = useCallback(() => {}, []);
   const handleRegistrationPress = useCallback(() => {}, []);
-  const handleSocialButtonPress = useCallback(type => {}, []);
+  const handleSocialButtonPress = useCallback(
+    async type => {
+      if (type === 'fb') {
+        try {
+          await dispatch(signInWithFacebook());
+        } catch (err) {
+          console.error(err);
+        }
+      }
+    },
+    [dispatch],
+  );
   const handleLoginPress = useCallback(() => {
     dispatch(signIn({ email, password }));
   }, [email, password, dispatch]);

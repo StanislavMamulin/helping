@@ -41,3 +41,19 @@ export const makeUserByEmailAndID = async (email = '', id = '') => {
     console.error(err);
   }
 };
+
+export const makeFacebookUserWithID = async (id = '', userInfo = {}) => {
+  try {
+    firestore().collection('Users').doc(id).set(userInfo);
+  } catch (err) {
+    console.error(err);
+  }
+};
+
+export const updateUserInfoByID = async (id = '', info = {}) => {
+  try {
+    firestore().collection('Users').doc(id).update(info);
+  } catch (err) {
+    console.error(err);
+  }
+};
