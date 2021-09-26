@@ -3,27 +3,34 @@ import auth from '@react-native-firebase/auth';
 
 export const firebaseSignInAnonymously = async () => {
   try {
-    await auth().signInAnonymously();
+    const anonymousUserCredential = await auth().signInAnonymously();
+    return anonymousUserCredential.user.toJSON();
   } catch (err) {
     if (err.code === 'auth/operation-not-allowed') {
       console.log('Enable anonymous in your firebase console.');
     }
 
     console.error(err);
+    return null;
   }
 };
 
 export const signInWithEmailAndPassword = async (email, password) => {
   try {
-    await auth.signInWithEmailAndPassword(email, password);
+    const userCredential = await auth().signInWithEmailAndPassword(
+      email,
+      password,
+    );
+    return userCredential.user.toJSON();
   } catch (err) {
     console.error(err);
+    return null;
   }
 };
 
 export const createUserWithEmailAndPassword = async (email, password) => {
   try {
-    await auth.createUserWithEmailAndPassword(email, password);
+    await auth().createUserWithEmailAndPassword(email, password);
   } catch (err) {
     if (err.code === 'auth/email-already-in-use') {
       console.log('That email address is already in use!');
@@ -39,7 +46,7 @@ export const createUserWithEmailAndPassword = async (email, password) => {
 
 export const signOut = async () => {
   try {
-    await auth.signOut();
+    await auth().signOut();
     console.log('User signed out!');
   } catch (err) {
     console.error(err);

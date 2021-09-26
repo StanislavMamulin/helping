@@ -8,9 +8,10 @@ export const ButtonThemed = ({
   text = '',
   styleButton = {},
   styleText = {},
+  onPress = () => {},
 }) => {
   return (
-    <TouchableOpacity style={[styles.button, styleButton]}>
+    <TouchableOpacity onPress={onPress} style={[styles.button, styleButton]}>
       <Text style={[styles.text, styleText]}>{text}</Text>
     </TouchableOpacity>
   );
@@ -20,4 +21,5 @@ ButtonThemed.propTypes = {
   text: PropTypes.string.isRequired,
   styleButton: PropTypes.object,
   styleText: PropTypes.object,
+  onPress: PropTypes.func.isRequired,
 };

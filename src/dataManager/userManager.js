@@ -1,5 +1,9 @@
 /* eslint-disable no-console */
 import {
+  firebaseSignInAnonymously,
+  signInWithEmailAndPassword,
+} from './firebase/auth';
+import {
   searchUserByEmail,
   searchUserByUID,
   makeUserByEmailAndID,
@@ -28,5 +32,23 @@ export const createUserByEmailAndID = async (email = '', id = '') => {
     makeUserByEmailAndID(email, id);
   } catch (err) {
     console.error(err);
+  }
+};
+
+export const signInByEmailAndPassword = async (email = '', password = '') => {
+  try {
+    return await signInWithEmailAndPassword(email, password);
+  } catch (err) {
+    console.error(err);
+    return null;
+  }
+};
+
+export const signInAnonymously = async () => {
+  try {
+    return await firebaseSignInAnonymously();
+  } catch (err) {
+    console.error(err);
+    return null;
   }
 };
