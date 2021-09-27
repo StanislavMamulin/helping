@@ -9,7 +9,7 @@ const bottomBorderStyle = active =>
 
 export const InputField = ({
   title = '',
-  style = {},
+  extStyle = {},
   onBlur = () => {},
   onFocus = () => {},
   ...props
@@ -17,11 +17,15 @@ export const InputField = ({
   const [isActive, setIsActive] = useState(false);
 
   return (
-    <View style={styles.container}>
-      <Text style={styles.title}>{title}</Text>
+    <View style={[styles.container, extStyle.container]}>
+      <Text style={[styles.title, extStyle.title]}>{title}</Text>
       <TextInput
         {...props}
-        style={[styles.textInput, bottomBorderStyle(isActive), style]}
+        style={[
+          styles.textInput,
+          bottomBorderStyle(isActive),
+          extStyle.textInput,
+        ]}
         onFocus={() => {
           onFocus();
           setIsActive(true);
@@ -37,7 +41,7 @@ export const InputField = ({
 
 InputField.propTypes = {
   title: PropTypes.string.isRequired,
-  style: PropTypes.object,
+  extStyle: PropTypes.object,
   onBlur: PropTypes.func,
   onFocus: PropTypes.func,
 };
