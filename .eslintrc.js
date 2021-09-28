@@ -30,5 +30,6 @@ module.exports = {
     'no-param-reassign': 'off',
     'react/jsx-filename-extension': ['error', { extensions: ['.js', '.jsx'] }],
     'react/prop-types': [0],
+    'react/require-default-props': 'off',
   },
 };

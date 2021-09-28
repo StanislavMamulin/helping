@@ -27,15 +27,3 @@ export const styles = StyleSheet.create({
     backgroundColor: 'rgba(0, 0, 0, 0.56)',
   },
 });
-
-export const inputFieldStyles = StyleSheet.create({
-  title: {
-    ...styles.fieldTitle,
-  },
-  textInput: {
-    textAlign: 'center',
-  },
-  container: {
-    marginBottom: 20,
-  },
-});
