@@ -18,15 +18,25 @@ export const SearchScreen = ({ navigation }) => {
     TYPES_OF_SEARCH.eventsTitle,
   );
   const [searchText, setSearchText] = useState('');
+  const [searchTextNKO, setSearchTextNKO] = useState('');
 
   const onSearchPressed = useCallback(
     ({ nativeEvent: { text } }) => {
-      navigation.navigate({
-        name: 'SearchEventsResults',
-        params: { title: text },
-      });
+      if (activeSearchType === TYPES_OF_SEARCH.eventsTitle) {
+        // search by events title
+        navigation.navigate({
+          name: 'SearchEventsResult',
+          params: {
+            title: text,
+            type: TYPES_OF_SEARCH.eventsTitle,
+          },
+        });
+      } else {
+        // search by nko title
+        setSearchTextNKO(text);
+      }
     },
-    [navigation],
+    [navigation, activeSearchType],
   );
 
   useLayoutEffect(() => {
@@ -60,23 +70,43 @@ export const SearchScreen = ({ navigation }) => {
     onSearchPressed,
   ]);
 
-  // Reset search when returning from a search results page
+  const resetSearchState = useCallback(() => {
+    setSearchText('');
+    resetSearch();
+  }, []);
+
+  // Reset search when returning from a search results page (by events title)
   useFocusEffect(
     useCallback(() => {
       return () => {
-        setSearchText('');
-        resetSearch();
+        if (activeSearchType === TYPES_OF_SEARCH.eventsTitle) {
+          resetSearchState();
+        }
       };
-    }, []),
+    }, [resetSearchState, activeSearchType]),
   );
 
-  const tabChanged = useCallback(type => {
-    setActiveSearchType(type);
+  const onExamplePress = useCallback(text => {
+    setShowSearchField(true);
+    setSearchText(text);
   }, []);
+
+  const tabChanged = useCallback(
+    type => {
+      setActiveSearchType(type);
+      setSearchTextNKO('');
+      resetSearchState();
+    },
+    [resetSearchState],
+  );
 
   return (
     <View style={styles.container}>
-      <SearchTabbar tabChanged={tabChanged} />
+      <SearchTabbar
+        tabChanged={tabChanged}
+        onExamplePress={onExamplePress}
+        searchTextNKO={searchTextNKO}
+      />
     </View>
   );
 };

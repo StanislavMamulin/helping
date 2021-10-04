@@ -7,7 +7,7 @@ import { createStackNavigator } from '@react-navigation/stack';
 import { EventDetailsScreen } from '../screens/EventDetailsScreen/EventDetailsScreen';
 import { ProfileEditScreen } from '../screens/ProfileEditScreen/ProfileEditScreen';
 import { MainTabsScreen } from './tabbars/MainTabbar';
-import AuthScreen from '../screens/AuthScreen/AuthScreen';
+import { AuthScreen } from '../screens/AuthScreen/AuthScreen';
 
 import { headerStyle } from './styles';
 

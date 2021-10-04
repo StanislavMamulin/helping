@@ -1,6 +1,7 @@
 import {
   findByEventsTitle,
   findByNKOTitle,
+  searchNKOByTitle,
   clearSearchState,
 } from './search/algolia';
 import { getEventsByIDs } from './firebase/firebase';
@@ -40,4 +41,10 @@ export const findEventsByNKO = async nkoTitle => {
 
 export const resetSearch = () => {
   clearSearchState();
+};
+
+export const findNKOByTitle = async nkoTitle => {
+  const NKOs = await searchNKOByTitle(nkoTitle);
+
+  return NKOs;
 };

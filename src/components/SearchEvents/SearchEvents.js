@@ -1,12 +1,13 @@
 import React, { useState } from 'react';
 import { View } from 'react-native';
+import PropTypes from 'prop-types';
 
 import { BlankSearch } from '../BlankSearch/BlankSearch';
 import { styles } from './styles';
 
 import { firstHint, secondHint } from './data';
 
-export const SearchEvents = () => {
+export const SearchEvents = ({ onExamplePress }) => {
   const [findedEvents, setFindedEvents] = useState([]);
 
   return (
@@ -14,8 +15,16 @@ export const SearchEvents = () => {
       {findedEvents.length ? (
         <View />
       ) : (
-        <BlankSearch firstHint={firstHint} secondHint={secondHint} />
+        <BlankSearch
+          firstHint={firstHint}
+          secondHint={secondHint}
+          onExamplePress={onExamplePress}
+        />
       )}
     </View>
   );
+};
+
+SearchEvents.propTypes = {
+  onExamplePress: PropTypes.func.isRequired,
 };
