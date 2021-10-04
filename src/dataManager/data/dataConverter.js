@@ -1,16 +1,20 @@
-export const FacebookUserInfoToUsersCollection = fbUser => {
-  const { displayName = '', email, photoURL, phoneNumber } = fbUser;
+export const facebookUserInfoToUsersCollection = fbUser => {
+  const { displayName = '', photoURL, phoneNumber } = fbUser;
 
   // dislpayName to FirstName, LastName
-  const [FirstName, LastName = ''] = displayName.split(' ');
-  // email to Email
+  const [firstName, lastName = ''] = displayName.split(' ');
   // photoURL to avatar
   // phoneNumber to Phone
   return {
-    FirstName,
-    LastName,
-    Email: email,
+    firstName,
+    lastName,
     avatar: photoURL,
-    Phone: phoneNumber,
+    phone: phoneNumber,
   };
 };
+
+export const getUserContacts = user => ({
+  phone: user.phone,
+  email: user.email,
+  specialization: user.specialization,
+});

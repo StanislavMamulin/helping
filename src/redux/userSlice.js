@@ -3,7 +3,8 @@ import { checkAuth, signByEmail, signInByFB } from './thunkFunc/auth';
 
 const initialState = {
   user: null,
-  loading: 'idle',
+  status: null,
+  error: null,
 };
 
 export const signIn = createAsyncThunk('users/signIn', signByEmail);
@@ -20,9 +21,6 @@ const userSlice = createSlice({
     setCurrentUser: (state, action) => {
       state.user = action.payload;
     },
-    getCurrentUser: state => {
-      return state.user;
-    },
     changeUserInfo: (state, action) => {
       state.user = {
         ...state.user,
@@ -32,27 +30,35 @@ const userSlice = createSlice({
   },
   extraReducers: builder => {
     builder.addCase(signIn.pending, state => {
-      state.loading = 'pending';
+      state.status = 'signing';
+      state.error = null;
     });
     builder.addCase(signIn.fulfilled, (state, action) => {
-      state.loading = 'idle';
+      state.status = 'signed';
+      state.error = null;
       state.user = action.payload;
     });
-    builder.addCase(signIn.rejected, state => {
-      state.loading = 'idle';
+    builder.addCase(signIn.rejected, (state, action) => {
+      state.status = 'signin error';
+      state.error = action.payload;
     });
+
     builder.addCase(checkUserAuth.fulfilled, (state, action) => {
-      state.loading = 'idle';
+      state.error = null;
+      state.status = 'anonymous user signed';
+
       state.user = action.payload;
     });
+
     builder.addCase(signInWithFacebook.fulfilled, (state, action) => {
-      state.loading = 'idle';
+      state.status = 'facebook user signed';
+      state.error = null;
+
       state.user = action.payload;
     });
   },
 });
 
-export const { setCurrentUser, getCurrentUser, changeUserInfo } =
-  userSlice.actions;
+export const { setCurrentUser, changeUserInfo } = userSlice.actions;
 
 export default userSlice.reducer;

@@ -25,23 +25,32 @@ export const signInWithEmailAndPassword = async (email, password) => {
     return userCredential.user.toJSON();
   } catch (err) {
     console.error(err);
-    return null;
+    return {
+      error: true,
+      message: err.message,
+    };
   }
 };
 
 export const createUserWithEmailAndPassword = async (email, password) => {
   try {
-    await auth().createUserWithEmailAndPassword(email, password);
+    const userCredential = await auth().createUserWithEmailAndPassword(email, password);
+    return userCredential.user.toJSON();
   } catch (err) {
+    let errorMessage = err.message;
     if (err.code === 'auth/email-already-in-use') {
-      console.log('That email address is already in use!');
+      errorMessage = 'That email address is already in use!';
     }
 
     if (err.code === 'auth/invalid-email') {
-      console.log('That email address is invalid!');
+      errorMessage = 'That email address is invalid!';
     }
 
     console.error(err);
+    return {
+      error: true,
+      message: errorMessage,
+    };
   }
 };
 

@@ -1,22 +1,34 @@
-import React, { useCallback, useState } from 'react';
+import React, { useCallback, useEffect, useRef, useState } from 'react';
 import { View, Text } from 'react-native';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
+import { useNavigation, useRoute } from '@react-navigation/native';
 
 import { AuthButtonsList } from './AuthButtonsList/AuthButtonsList';
 import { InputField } from '../../components/InputFields/InputField/InputField';
 import { ButtonThemed } from '../../components/ButtonThemed/ButtonThemed';
 import { LinkThemed } from '../../components/LinkThemed/LinkThemed';
+import { PasswordField } from '../../components/InputFields/PasswordField/PasswordField';
 
 import { signIn, signInWithFacebook } from '../../redux/userSlice';
 
 import { styles } from './styles';
-import { PasswordField } from '../../components/InputFields/PasswordField/PasswordField';
 
 export const AuthScreen = () => {
   const dispatch = useDispatch();
+  const { user } = useSelector(state => state.user);
+  const route = useRoute();
+  const navigation = useNavigation();
 
+  const signinCallback = useRef(() => {});
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+
+  useEffect(() => {
+    const { loginCallback } = route.params;
+    if (loginCallback) {
+      signinCallback.current = loginCallback;
+    }
+  }, [route.params]);
 
   const handleForgotPasswordPress = useCallback(() => {}, []);
   const handleRegistrationPress = useCallback(() => {}, []);
@@ -32,9 +44,17 @@ export const AuthScreen = () => {
     },
     [dispatch],
   );
+
   const handleLoginPress = useCallback(() => {
     dispatch(signIn({ email, password }));
   }, [email, password, dispatch]);
+
+  useEffect(() => {
+    if (user && !user.isAnonymous) {
+      navigation.goBack();
+      signinCallback.current();
+    }
+  }, [user, navigation]);
 
   return (
     <View style={styles.container}>
