@@ -1,20 +1,40 @@
 import React, { useCallback, useState } from 'react';
 import { View, Text } from 'react-native';
+import { useDispatch } from 'react-redux';
+
 import { AuthButtonsList } from './AuthButtonsList/AuthButtonsList';
 import { InputField } from '../../components/InputFields/InputField/InputField';
 import { ButtonThemed } from '../../components/ButtonThemed/ButtonThemed';
 import { LinkThemed } from '../../components/LinkThemed/LinkThemed';
 
+import { signIn, signInWithFacebook } from '../../redux/userSlice';
+
 import { styles } from './styles';
 import { PasswordField } from '../../components/InputFields/PasswordField/PasswordField';
 
 export const AuthScreen = () => {
-  const handleForgotPasswordPress = useCallback(() => {}, []);
-  const handleRegistrationPress = useCallback(() => {}, []);
-  const handleSocialButtonPress = useCallback(type => {}, []);
+  const dispatch = useDispatch();
 
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+
+  const handleForgotPasswordPress = useCallback(() => {}, []);
+  const handleRegistrationPress = useCallback(() => {}, []);
+  const handleSocialButtonPress = useCallback(
+    async type => {
+      if (type === 'fb') {
+        try {
+          await dispatch(signInWithFacebook());
+        } catch (err) {
+          console.error(err);
+        }
+      }
+    },
+    [dispatch],
+  );
+  const handleLoginPress = useCallback(() => {
+    dispatch(signIn({ email, password }));
+  }, [email, password, dispatch]);
 
   return (
     <View style={styles.container}>
@@ -43,6 +63,7 @@ export const AuthScreen = () => {
         text="ВОЙТИ"
         styleButton={styles.button}
         styleText={styles.buttonText}
+        onPress={handleLoginPress}
       />
       <View style={styles.linkContainer}>
         <LinkThemed text="Забыли пароль?" onPress={handleForgotPasswordPress} />
