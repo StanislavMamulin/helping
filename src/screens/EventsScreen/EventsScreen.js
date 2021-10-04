@@ -34,6 +34,7 @@ export const EventsScreen = ({
   useEffect(() => {
     const fetchFirstEvents = async () => {
       const firstEvents = await getFirstPart();
+
       setIsLoading(false);
       setEvents(firstEvents);
     };

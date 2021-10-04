@@ -14,7 +14,7 @@ export const BlankSearch = ({
     <Text style={styles.firstHint}>{firstHint}</Text>
     <View style={styles.secondHintContainer}>
       <Text style={styles.secondHint}>{'Например, '}</Text>
-      <TouchableOpacity onPress={onExamplePress}>
+      <TouchableOpacity onPress={() => onExamplePress(secondHint)}>
         <Text style={styles.link}>{secondHint}</Text>
       </TouchableOpacity>
     </View>
