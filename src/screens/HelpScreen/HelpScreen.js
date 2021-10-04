@@ -1,12 +1,21 @@
-import React from 'react';
-import { View } from 'react-native';
-import styles from './styles';
+import React, { useEffect, useState } from 'react';
+import { Text, View } from 'react-native';
 
-const HelpScreen = () => {
+import { CategoryList } from '../../components/CategoryList/CategoryList';
+
+import { styles } from './styles';
+
+export const HelpScreen = () => {
+  const [categories, setCategories] = useState([]);
+
+  useEffect(() => {
+    // get/set categories
+  }, []);
+
   return (
-    <View>
+    <View style={styles.container}>
+      <Text style={styles.title}>Выберите категорию помощи</Text>
+      <CategoryList categories={categories} />
     </View>
   );
 };
-
-export default HelpScreen;
