@@ -1,5 +1,6 @@
 import { StyleSheet } from 'react-native';
 import { textStyles } from '../../commonStyles/text';
+import { colors } from '../../commonStyles/colors';
 
 export const styles = StyleSheet.create({
   container: {
@@ -7,6 +8,8 @@ export const styles = StyleSheet.create({
 
     justifyContent: 'center',
     alignItems: 'center',
+
+    backgroundColor: colors.LIGHT_GREY,
   },
   imageContainer: {
     width: 120,

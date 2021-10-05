@@ -4,6 +4,8 @@ import { textStyles } from '../../commonStyles/text';
 export const styles = StyleSheet.create({
   container: {
     padding: 8,
+    backgroundColor: 'white',
+    flex: 1,
   },
   title: {
     marginTop: 11,
