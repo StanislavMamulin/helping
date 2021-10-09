@@ -1,3 +1,4 @@
+/* eslint-disable no-console */
 import firestore from '@react-native-firebase/firestore';
 import startOfToday from 'date-fns/startOfToday';
 
@@ -110,6 +111,25 @@ export const getEventsByIDs = async IDs => {
     const events = await Promise.all(eventsDataPromises);
 
     return events;
+  } catch (err) {
+    console.error(err);
+    return [];
+  }
+};
+
+export const getCategoriesOfHelp = async () => {
+  try {
+    const categories = [];
+
+    const categoriesSnapshot = await firestore()
+      .collection('CategoriesOfHelp')
+      .get();
+
+    categoriesSnapshot.forEach(categoriesDocument => {
+      categories.push(categoriesDocument.data());
+    });
+
+    return categories;
   } catch (err) {
     console.error(err);
     return [];

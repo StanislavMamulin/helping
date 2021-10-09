@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { Text, View } from 'react-native';
 
 import { CategoryList } from '../../components/CategoryList/CategoryList';
+import { getHelpCategories } from '../../dataManager/dataManager';
 
 import { styles } from './styles';
 
@@ -9,7 +10,11 @@ export const HelpScreen = () => {
   const [categories, setCategories] = useState([]);
 
   useEffect(() => {
-    // get/set categories
+    const getCategories = async () => {
+      setCategories(await getHelpCategories());
+    };
+
+    getCategories();
   }, []);
 
   return (
