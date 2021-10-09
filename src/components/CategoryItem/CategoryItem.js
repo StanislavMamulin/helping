@@ -8,8 +8,12 @@ export const CategoryItem = ({
   imageURL = '',
   title = '',
   size: { width, aspectRatio } = {},
+  onPress = () => {},
 }) => (
-  <TouchableOpacity style={[styles.container, { width, aspectRatio }]}>
+  <TouchableOpacity
+    style={[styles.container, { width, aspectRatio }]}
+    onPress={onPress}
+  >
     <View style={styles.imageContainer}>
       <Image
         source={{ uri: imageURL }}
