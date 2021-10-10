@@ -1,22 +1,43 @@
 import React from 'react';
-import { View, Modal, Text } from 'react-native';
-import { styles } from './styles';
-import { ButtonStrip } from '../../components/ButtonStrip/ButtonStrip';
-import { ContactsList } from '../../components/ContactsList/ContactsList';
+import { View, Modal } from 'react-native';
+import PropTypes from 'prop-types';
 
-export const ContactsModalScreen = () => {
-  return (
-    <Modal visible transparent animationType="fade">
-      <View style={styles.centeredView}>
-        <View style={styles.container}>
-          <View style={styles.contactsContainer}>
-            <Text style={styles.headerTitle}>Спасибо за решение помочь!</Text>
-            <ContactsList />
-            <Text style={styles.fieldTitle}>Мы с вами свяжемся.</Text>
-          </View>
-          <ButtonStrip actionText="ОТПРАВИТЬ" />
-        </View>
+import { SuccessHelpNotification } from '../../components/SuccessHelpNotificatio/SuccessHelpNotification';
+import { ContactsContainer } from '../../components/ContactsContainer/ContactsContainer';
+
+import { styles } from './styles';
+
+export const ContactsModalScreen = ({
+  show = false,
+  onActionPress,
+  onCancelPress,
+  showSpecialization,
+  helpProvided = false,
+  actionText,
+}) => (
+  <Modal visible={show} transparent animationType="fade">
+    <View style={styles.centeredView}>
+      <View style={styles.container}>
+        {helpProvided ? (
+          <SuccessHelpNotification onActionPress={onActionPress} />
+        ) : (
+          <ContactsContainer
+            onActionPress={onActionPress}
+            onCancelPress={onCancelPress}
+            showSpecialization={showSpecialization}
+            actionText={actionText}
+          />
+        )}
       </View>
-    </Modal>
-  );
+    </View>
+  </Modal>
+);
+
+ContactsModalScreen.propTypes = {
+  show: PropTypes.bool.isRequired,
+  onActionPress: PropTypes.func,
+  onCancelPress: PropTypes.func,
+  showSpecialization: PropTypes.bool,
+  helpProvided: PropTypes.bool.isRequired,
+  actionText: PropTypes.string,
 };

@@ -1,4 +1,4 @@
-import { FacebookUserInfoToUsersCollection } from '../../dataManager/data/dataConverter';
+import { facebookUserInfoToUsersCollection } from '../../dataManager/data/dataConverter';
 import {
   getUserByEmail,
   getUserByUID,
@@ -7,10 +7,16 @@ import {
   signInWithFacebook,
   createFacebookUserWithID,
 } from '../../dataManager/userManager';
+import { showErrorWithMessage } from '../../helpers/error';
 
-export const signByEmail = async ({ email, password }) => {
+export const signByEmail = async ({ email, password }, { rejectWithValue }) => {
   try {
     const firebaseUser = await signInByEmailAndPassword(email, password);
+
+    if (firebaseUser.error) {
+      throw new Error(firebaseUser.message);
+    }
+
     const userInfo = await getUserByEmail(email);
 
     return {
@@ -19,7 +25,8 @@ export const signByEmail = async ({ email, password }) => {
     };
   } catch (err) {
     console.error(err);
-    return {};
+    showErrorWithMessage(err.message);
+    return rejectWithValue(err.message);
   }
 };
 
@@ -44,7 +51,7 @@ export const signInByFB = async () => {
     let userInfo = await getUserByUID(uid);
     if (!userInfo) {
       // create new user in Users collection
-      userInfo = FacebookUserInfoToUsersCollection(facebookUser);
+      userInfo = facebookUserInfoToUsersCollection(facebookUser);
       createFacebookUserWithID(uid, userInfo);
     }
 

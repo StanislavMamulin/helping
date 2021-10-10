@@ -8,6 +8,7 @@ import { checkUserAuth } from './src/redux/userSlice';
 
 import { MainScreen } from './src/navigation/Navigation';
 import { LoadingScreen } from './src/screens/LoadingScreen/LoadingScreen';
+import { HelpProcessingModals } from './src/screens/HelpProcessingModals/HelpProcessingModals';
 
 const App = () => {
   const dispatch = useDispatch();
@@ -31,6 +32,7 @@ const App = () => {
     <SafeAreaProvider>
       <StatusBar barStyle={isDarkMode ? 'light-content' : 'dark-content'} />
       {isLoading ? <LoadingScreen /> : <MainScreen />}
+      <HelpProcessingModals />
     </SafeAreaProvider>
   );
 };

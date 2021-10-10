@@ -9,6 +9,7 @@ import {
   searchUserByUID,
   makeUserByEmailAndID,
   makeFacebookUserWithID,
+  makeUserWithID,
 } from './firebase/user';
 
 export const getUserByEmail = async email => {
@@ -40,6 +41,14 @@ export const createUserByEmailAndID = async (email = '', id = '') => {
 export const createFacebookUserWithID = async (id, userInfo) => {
   try {
     makeFacebookUserWithID(id, userInfo);
+  } catch (err) {
+    console.error(err);
+  }
+};
+
+export const createUserWithID = async (id, userInfo) => {
+  try {
+    makeUserWithID(id, userInfo);
   } catch (err) {
     console.error(err);
   }

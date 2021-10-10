@@ -5,7 +5,7 @@ export const searchUserByEmail = async (email = '') => {
   try {
     const userSnapshot = await firestore()
       .collection('Users')
-      .where('Email', '==', email.toLocaleLowerCase())
+      .where('email', '==', email.toLocaleLowerCase())
       .get();
 
     if (!userSnapshot.empty) {
@@ -45,6 +45,14 @@ export const makeUserByEmailAndID = async (email = '', id = '') => {
 export const makeFacebookUserWithID = async (id = '', userInfo = {}) => {
   try {
     firestore().collection('Users').doc(id).set(userInfo);
+  } catch (err) {
+    console.error(err);
+  }
+};
+
+export const makeUserWithID = async (id = '', userInfo = {}) => {
+  try {
+    await firestore().collection('Users').doc(id).set(userInfo);
   } catch (err) {
     console.error(err);
   }

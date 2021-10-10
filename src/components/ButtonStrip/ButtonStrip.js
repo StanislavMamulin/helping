@@ -25,6 +25,6 @@ export const ButtonStrip = ({
 ButtonStrip.propTypes = {
   actionText: PropTypes.string.isRequired,
   cancelText: PropTypes.string,
-  onCancelPress: PropTypes.func.isRequired,
+  onCancelPress: PropTypes.func,
   onActionPress: PropTypes.func.isRequired,
 };
