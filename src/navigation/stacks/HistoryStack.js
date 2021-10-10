@@ -1,7 +1,7 @@
 import React from 'react';
 import { createStackNavigator } from '@react-navigation/stack';
 
-import HistoryScreen from '../../screens/HistoryScreen/HistoryScreen';
+import { HistoryScreen } from '../../screens/HistoryScreen/HistoryScreen';
 import { headerStyle } from '../styles';
 
 const HistoryStack = createStackNavigator();

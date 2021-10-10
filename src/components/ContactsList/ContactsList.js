@@ -9,34 +9,36 @@ export const ContactsList = ({
   email = '',
   specialization = '',
   showSpecialization = true,
-}) => {
-  return (
-    <>
+  onChangeFieldValue = () => {},
+}) => (
+  <>
+    <InputField
+      title="Оставьте свой телефон"
+      placeholder="+7 (___) ___-__-__"
+      extStyle={inputFieldStyles}
+      keyboardType="phone-pad"
+      value={phone}
+      onChangeText={text => onChangeFieldValue({ phone: text })}
+    />
+    <InputField
+      title="или e-mail"
+      placeholder="Введите e-mail"
+      extStyle={inputFieldStyles}
+      keyboardType="email-address"
+      value={email}
+      onChangeText={text => onChangeFieldValue({ email: text })}
+    />
+    {showSpecialization && (
       <InputField
-        title="Оставьте свой телефон"
-        placeholder="+7 (___) ___-__-__"
+        title={`и укажите специализацию,\nв которой можете помочь`}
+        placeholder="Укажите специализацию"
         extStyle={inputFieldStyles}
-        keyboardType="phone-pad"
-        value={phone}
+        value={specialization}
+        onChangeText={text => onChangeFieldValue({ specialization: text })}
       />
-      <InputField
-        title="или e-mail"
-        placeholder="Введите e-mail"
-        extStyle={inputFieldStyles}
-        keyboardType="email-address"
-        value={email}
-      />
-      {showSpecialization && (
-        <InputField
-          title={`и укажите специализацию,\nв которой можете помочь`}
-          placeholder="Укажите специализацию"
-          extStyle={inputFieldStyles}
-          value={specialization}
-        />
-      )}
-    </>
-  );
-};
+    )}
+  </>
+);
 
 ContactsList.propTypes = {
   phone: PropTypes.string,
