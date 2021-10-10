@@ -1,3 +1,3 @@
 export const sizes = {
-  CENTRAL_BUTTON_OFFSET: 24,
+  CENTRAL_BUTTON_OFFSET: 28,
 };

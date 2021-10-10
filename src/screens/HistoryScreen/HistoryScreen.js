@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { View } from 'react-native';
 
 import { EmptyHistory } from '../../components/EmptyHistory/EmptyHistory';
-import { HistoryList } from '../../components/HistoryList/HistoryList';
+import { RequestsHistoryList } from '../../components/RequestsHistoryList/RequestsHistoryList';
 
 import styles from './styles';
 
@@ -10,12 +10,16 @@ export const HistoryScreen = () => {
   const [helpingHistory, setHelpingHistory] = useState([]);
 
   useEffect(() => {
-    // getHistory
+    // get/set request history
   }, []);
 
   return (
     <View style={styles.container}>
-      {helpingHistory.length === 0 ? <EmptyHistory /> : <HistoryList />}
+      {helpingHistory.length === 0 ? (
+        <EmptyHistory />
+      ) : (
+        <RequestsHistoryList historyEvents={helpingHistory} />
+      )}
     </View>
   );
 };
