@@ -5,7 +5,9 @@ import { useNavigation } from '@react-navigation/native';
 import PropTypes from 'prop-types';
 
 import { showHelpActionModal, setTypeOfHelp } from '../../redux/modalSlice';
+import { setCurrentEvent, setSelectedTypeOfHelp } from '../../redux/eventSlice';
 import { TYPES_OF_HELP_ENUM } from '../../dataManager/data/typesOfHelp';
+import { convertCategoryToEvent } from '../../dataManager/data/dataConverter';
 
 import { ItemSeparator } from './ItemSeparator';
 import { RenderCategoryItem } from './RenderItem';
@@ -22,19 +24,25 @@ export const CategoryList = ({ categories }) => {
     dispatch(setTypeOfHelp(TYPES_OF_HELP_ENUM.money));
   }, [dispatch]);
 
-  const handlePress = useCallback(() => {
-    const anonymous = user.isAnonymous;
-    if (anonymous) {
-      navigation.navigate({
-        name: 'Auth',
-        params: {
-          loginCallback: showModal,
-        },
-      });
-    } else {
-      showModal();
-    }
-  }, [user, navigation, showModal]);
+  const handlePress = useCallback(
+    title => {
+      dispatch(setCurrentEvent(convertCategoryToEvent(title)));
+      dispatch(setSelectedTypeOfHelp(TYPES_OF_HELP_ENUM.money));
+
+      const anonymous = user.isAnonymous;
+      if (anonymous) {
+        navigation.navigate({
+          name: 'Auth',
+          params: {
+            loginCallback: showModal,
+          },
+        });
+      } else {
+        showModal();
+      }
+    },
+    [user, navigation, showModal, dispatch],
+  );
 
   return (
     <FlatList

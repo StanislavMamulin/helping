@@ -16,7 +16,9 @@ export const ContactsContainer = ({
   actionText = 'ОТПРАВИТЬ',
 }) => {
   const dispatch = useDispatch();
-  const { phone, email, specialization } = useSelector(state => state.modal);
+  const {
+    contacts: { phone, email, specialization },
+  } = useSelector(state => state.modal);
   const { user } = useSelector(state => state.user);
 
   useEffect(() => {

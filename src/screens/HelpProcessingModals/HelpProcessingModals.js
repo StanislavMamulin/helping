@@ -4,15 +4,24 @@ import {
   hideHelpActionModal,
   successHelpProvided,
 } from '../../redux/modalSlice';
+
+import { setEventDonationAmount } from '../../redux/eventSlice';
+
 import { ContactsModalScreen } from '../ContactsModalScreen/ContactsModalScreen';
 import { DonationAmountModal } from '../DonationAmountModal/DonationAmountModal';
+
 import { TYPES_OF_HELP_ENUM } from '../../dataManager/data/typesOfHelp';
+import { addHelp } from '../../dataManager/dataManager';
+
+import { getActionText } from './data';
 
 export const HelpProcessingModals = () => {
   const dispatch = useDispatch();
-  const { showHelpActionModal, helpType, helpProvided } = useSelector(
+  const { showHelpActionModal, helpType, helpProvided, contacts } = useSelector(
     state => state.modal,
   );
+  const eventInfo = useSelector(state => state.event);
+  const { uid } = useSelector(state => state.user.user);
 
   const [showDonation, setShowDonation] = useState(false);
   const [showSpecialization, setShowSpecialization] = useState(false);
@@ -25,10 +34,14 @@ export const HelpProcessingModals = () => {
     }
   }, [helpType]);
 
+  // send a request for help
   const handleActionFinalPress = () => {
     dispatch(hideHelpActionModal());
+    addHelp(uid, { ...eventInfo, contacts });
+    dispatch(setEventDonationAmount(null));
   };
 
+  // go to the next modal window
   const handleActionTransitionPress = useCallback(() => {
     if (helpType === TYPES_OF_HELP_ENUM.money) {
       setShowDonation(true);
@@ -36,9 +49,6 @@ export const HelpProcessingModals = () => {
       dispatch(successHelpProvided());
     }
   }, [dispatch, helpType]);
-
-  const getActionText =
-    helpType === TYPES_OF_HELP_ENUM.money ? 'ВЫБРАТЬ СУММУ' : 'ОТПРАВИТЬ';
 
   return (
     <>
@@ -52,7 +62,7 @@ export const HelpProcessingModals = () => {
         }}
         helpProvided={helpProvided}
         showSpecialization={showSpecialization}
-        actionText={getActionText}
+        actionText={getActionText(helpType)}
       />
       <DonationAmountModal
         show={showDonation}
