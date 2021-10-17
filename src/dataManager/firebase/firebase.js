@@ -188,3 +188,17 @@ export const getHelpReportURLByID = async charityID => {
     return '';
   }
 };
+
+export const getUsersData = async userList => {
+  try {
+    const usersPromises = userList.map(userRef =>
+      firestore().doc(userRef.path).get(),
+    );
+    const usersSnapshots = await Promise.all(usersPromises);
+
+    return usersSnapshots.map(userSnapshot => userSnapshot.data());
+  } catch (err) {
+    console.error(err);
+    return [];
+  }
+};
