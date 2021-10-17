@@ -6,8 +6,6 @@ export const styles = StyleSheet.create({
     flex: 1,
     alignItems: 'center',
     justifyContent: 'space-between',
-    borderColor: 'red',
-    borderWidth: 1,
   },
   scrollImage: {
     aspectRatio: 0.967,
