@@ -10,5 +10,5 @@ export const Friend = ({ friendInfo: { avatar, firstName, lastName } }) => (
 Friend.propTypes = {
   avatar: PropTypes.string.isRequired,
   firstName: PropTypes.string.isRequired,
-  lastName: PropTypes.string.isRequired,
+  lastName: PropTypes.string,
 };
