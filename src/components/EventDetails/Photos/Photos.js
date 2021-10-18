@@ -23,6 +23,6 @@ export const Photos = ({ photos: { titlePhoto = '', eventPhotos = [] } }) => (
 );
 
 Photos.propTypes = {
-  titlePhoto: PropTypes.string.isRequired,
-  eventPhotos: PropTypes.arrayOf(PropTypes.string).isRequired,
+  titlePhoto: PropTypes.string,
+  eventPhotos: PropTypes.arrayOf(PropTypes.string),
 };

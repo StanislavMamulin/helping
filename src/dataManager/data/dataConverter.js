@@ -14,7 +14,18 @@ export const facebookUserInfoToUsersCollection = fbUser => {
 };
 
 export const getUserContacts = user => ({
-  phone: user.phone,
-  email: user.email,
-  specialization: user.specialization,
+  phone: user.phone ?? null,
+  email: user.email ?? null,
+  specialization: user.specialization ?? null,
 });
+
+export const convertCategoryToEvent = title => {
+  const now = Date.now();
+  return {
+    title,
+    date: {
+      from: now,
+      to: now,
+    },
+  };
+};

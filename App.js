@@ -17,7 +17,7 @@ const App = () => {
 
   const initApp = async () => {
     try {
-      dispatch(checkUserAuth());
+      await dispatch(checkUserAuth());
       setIsLoading(false);
     } catch (err) {
       console.error(err);
@@ -28,10 +28,14 @@ const App = () => {
     initApp();
   }, []);
 
+  if (isLoading) {
+    return <LoadingScreen />;
+  }
+
   return (
     <SafeAreaProvider>
       <StatusBar barStyle={isDarkMode ? 'light-content' : 'dark-content'} />
-      {isLoading ? <LoadingScreen /> : <MainScreen />}
+      <MainScreen />
       <HelpProcessingModals />
     </SafeAreaProvider>
   );

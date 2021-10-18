@@ -4,6 +4,7 @@ import PropTypes from 'prop-types';
 
 import { HistoryItemCard } from './HistoryItemCard/HistoryItemCard';
 import { RequestsListSeparator } from './RequestsListSeparator/RequestsListSeparator';
+import { downloadHelpReportByID } from '../../dataManager/dataManager';
 
 import { styles } from './styles';
 
@@ -11,8 +12,8 @@ export const RequestsHistoryList = ({
   historyEvents = [],
   onEndReached = () => {},
 }) => {
-  const handleReportPress = useCallback(() => {
-
+  const handleReportPress = useCallback(charityID => {
+    downloadHelpReportByID(charityID);
   }, []);
 
   return (

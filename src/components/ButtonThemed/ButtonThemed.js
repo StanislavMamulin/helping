@@ -9,13 +9,11 @@ export const ButtonThemed = ({
   styleButton = {},
   styleText = {},
   onPress = () => {},
-}) => {
-  return (
-    <TouchableOpacity onPress={onPress} style={[styles.button, styleButton]}>
-      <Text style={[styles.text, styleText]}>{text}</Text>
-    </TouchableOpacity>
-  );
-};
+}) => (
+  <TouchableOpacity onPress={onPress} style={[styles.button, styleButton]}>
+    <Text style={[styles.text, styleText]}>{text}</Text>
+  </TouchableOpacity>
+);
 
 ButtonThemed.propTypes = {
   text: PropTypes.string.isRequired,

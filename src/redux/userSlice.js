@@ -27,6 +27,7 @@ const userSlice = createSlice({
         ...action.payload,
       };
     },
+    userSignOut: () => initialState,
   },
   extraReducers: builder => {
     builder.addCase(signIn.pending, state => {
@@ -59,6 +60,7 @@ const userSlice = createSlice({
   },
 });
 
-export const { setCurrentUser, changeUserInfo } = userSlice.actions;
+export const { setCurrentUser, changeUserInfo, userSignOut } =
+  userSlice.actions;
 
 export default userSlice.reducer;

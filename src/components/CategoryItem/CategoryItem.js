@@ -12,7 +12,7 @@ export const CategoryItem = ({
 }) => (
   <TouchableOpacity
     style={[styles.container, { width, aspectRatio }]}
-    onPress={onPress}
+    onPress={() => onPress(title)}
   >
     <View style={styles.imageContainer}>
       <Image

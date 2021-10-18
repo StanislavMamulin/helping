@@ -103,6 +103,16 @@ export const textStyles = StyleSheet.create({
     letterSpacing: 0,
     color: colors.BLACK_54,
   },
+  TEXT_STYLE_14: {
+    fontFamily: 'Roboto',
+    fontSize: 24,
+    fontWeight: 'normal',
+    fontStyle: 'normal',
+    lineHeight: 32,
+    letterSpacing: 0,
+    textAlign: 'left',
+    color: colors.BLACK_87,
+  },
   TEXT_STYLE_15: {
     fontFamily: 'Roboto',
     fontSize: 12,
