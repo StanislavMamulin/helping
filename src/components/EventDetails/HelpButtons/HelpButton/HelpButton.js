@@ -8,6 +8,7 @@ import {
   showHelpActionModal,
   setTypeOfHelp,
 } from '../../../../redux/modalSlice';
+import { setSelectedTypeOfHelp } from '../../../../redux/eventSlice';
 
 import { typesToIconMap, typesToLabelMap } from './dataMapping';
 import styles from './styles';
@@ -23,6 +24,8 @@ export const HelpButton = ({ type }) => {
   }, [dispatch, type]);
 
   const handlePress = useCallback(() => {
+    dispatch(setSelectedTypeOfHelp(type));
+
     const anonymous = user.isAnonymous;
     if (anonymous) {
       navigation.navigate({
@@ -34,7 +37,7 @@ export const HelpButton = ({ type }) => {
     } else {
       showModal();
     }
-  }, [user, navigation, showModal]);
+  }, [user, navigation, showModal, dispatch, type]);
 
   return (
     <TouchableOpacity style={styles.button} onPress={handlePress}>

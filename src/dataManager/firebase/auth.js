@@ -54,10 +54,9 @@ export const createUserWithEmailAndPassword = async (email, password) => {
   }
 };
 
-export const signOut = async () => {
+export const logOff = async () => {
   try {
     await auth().signOut();
-    console.log('User signed out!');
   } catch (err) {
     console.error(err);
   }

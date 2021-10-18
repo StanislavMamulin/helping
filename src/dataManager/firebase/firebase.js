@@ -1,5 +1,6 @@
 /* eslint-disable no-console */
 import firestore from '@react-native-firebase/firestore';
+import storage from '@react-native-firebase/storage';
 import startOfToday from 'date-fns/startOfToday';
 
 let lastEvent;
@@ -64,7 +65,7 @@ export const getPartOfEvents = async ({ firstPart, count = 0 }) => {
 
       const eventData = [];
       eventsDoc.forEach(docSnapshot => {
-        eventData.push(docSnapshot.data());
+        eventData.push({ ...docSnapshot.data(), id: docSnapshot.id });
       });
 
       // объединение данных из разных коллекций
@@ -130,6 +131,72 @@ export const getCategoriesOfHelp = async () => {
     });
 
     return categories;
+  } catch (err) {
+    console.error(err);
+    return [];
+  }
+};
+
+export const addHelpToUser = async (userID, helpInfo) => {
+  try {
+    const userDocSnapshot = await firestore()
+      .collection('Users')
+      .doc(userID)
+      .get();
+    let prevHelp = userDocSnapshot.get('help');
+
+    if (!prevHelp) {
+      prevHelp = [];
+    }
+    prevHelp.push(helpInfo);
+
+    await firestore().collection('Users').doc(userID).update({
+      help: prevHelp,
+    });
+  } catch (err) {
+    console.error(err);
+  }
+};
+
+export const getHelpsForUser = async userID => {
+  try {
+    const userDocSnapshot = await firestore()
+      .collection('Users')
+      .doc(userID)
+      .get();
+    let prevHelp = userDocSnapshot.get('help');
+
+    if (!prevHelp) {
+      prevHelp = [];
+    }
+
+    return prevHelp;
+  } catch (err) {
+    console.error(err);
+    return [];
+  }
+};
+
+export const getHelpReportURLByID = async charityID => {
+  const charityIDMockup = 'huf84fHDiw94wXZ033kdj48s';
+  try {
+    return await storage()
+      .ref(`HelpReports/${charityIDMockup}/Отчёт о пожертвовании.pdf`)
+      .getDownloadURL();
+  } catch (err) {
+    console.error(err);
+    return '';
+  }
+};
+
+export const getUsersData = async userList => {
+  try {
+    const usersPromises = userList.map(userRef =>
+      firestore().doc(userRef.path).get(),
+    );
+    const usersSnapshots = await Promise.all(usersPromises);
+
+    return usersSnapshots.map(userSnapshot => userSnapshot.data());
   } catch (err) {
     console.error(err);
     return [];

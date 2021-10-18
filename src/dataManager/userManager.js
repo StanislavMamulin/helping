@@ -3,7 +3,9 @@ import {
   firebaseSignInAnonymously,
   signInWithEmailAndPassword,
   signInWithFB,
+  logOff,
 } from './firebase/auth';
+import { getUsersData } from './firebase/firebase';
 import {
   searchUserByEmail,
   searchUserByUID,
@@ -78,5 +80,22 @@ export const signInWithFacebook = async () => {
   } catch (err) {
     console.error(err);
     return null;
+  }
+};
+
+export const signOut = async () => {
+  try {
+    await logOff();
+  } catch (err) {
+    console.error(err);
+  }
+};
+
+export const getUsersInfo = async users => {
+  try {
+    return await getUsersData(users);
+  } catch (err) {
+    console.error(err);
+    return [];
   }
 };

@@ -11,7 +11,13 @@ const getHelpProvidedText = (helpProvided, donation) =>
   donation > 0 ? `Помощь деньгами: ${donation} ₽` : helpProvided;
 
 export const HistoryItemCard = ({
-  event: { title = '', date = {}, typeOfHelp = '', donationAmount = 0 },
+  event: {
+    title = '',
+    date = {},
+    typeOfHelp = '',
+    donationAmount = 0,
+    charityID = '',
+  },
   onPress = () => {},
 }) => (
   <View style={styles.container}>
@@ -23,7 +29,7 @@ export const HistoryItemCard = ({
     {donationAmount > 0 && (
       <ButtonThemed
         text="Скачать отчет"
-        onPress={onPress}
+        onPress={() => onPress(charityID)}
         styleButton={styles.button}
       />
     )}
