@@ -1,4 +1,4 @@
-import React, { useLayoutEffect, useState } from 'react';
+import React, { useLayoutEffect, useState, useCallback } from 'react';
 import { ScrollView } from 'react-native';
 import { useDispatch, useSelector } from 'react-redux';
 import PropTypes from 'prop-types';
@@ -44,25 +44,28 @@ export const ProfileEditScreen = ({ navigation }) => {
 
   const [showChangeAvatarModal, setShowChangeAvatarModal] = useState(false);
 
-  const upload = async ({ didCancel, assets }) => {
-    setShowChangeAvatarModal(false);
-    if (!didCancel) {
-      const { uri } = assets[0];
-      const avatarURL = await uploadAvatar(uid, uri);
-      dispatch(changeTempUserInfo({ avatar: avatarURL }));
-    }
-  };
+  const upload = useCallback(
+    async ({ didCancel, assets }) => {
+      setShowChangeAvatarModal(false);
+      if (!didCancel) {
+        const { uri } = assets[0];
+        const avatarURL = await uploadAvatar(uid, uri);
+        dispatch(changeTempUserInfo({ avatar: avatarURL }));
+      }
+    },
+    [uid, dispatch],
+  );
 
-  const handleUpload = () => {
+  const handleUpload = useCallback(() => {
     launchImageLibrary(
       {
         mediaType: 'photo',
       },
       upload,
     );
-  };
+  }, [upload]);
 
-  const handleCamera = () => {
+  const handleCamera = useCallback(() => {
     launchCamera(
       {
         mediaType: 'photo',
@@ -70,20 +73,23 @@ export const ProfileEditScreen = ({ navigation }) => {
       },
       upload,
     );
-  };
+  }, [upload]);
 
-  const handleDeleteAvatar = () => {
+  const handleDeleteAvatar = useCallback(() => {
     setShowChangeAvatarModal(false);
     dispatch(changeTempUserInfo({ avatar: null }));
-  };
+  }, [dispatch]);
 
-  const handleAvatarPress = () => {
+  const handleAvatarPress = useCallback(() => {
     setShowChangeAvatarModal(true);
-  };
+  }, []);
 
-  const handleChangeUserInfo = info => {
-    dispatch(changeTempUserInfo(info));
-  };
+  const handleChangeUserInfo = useCallback(
+    info => {
+      dispatch(changeTempUserInfo(info));
+    },
+    [dispatch],
+  );
 
   return (
     <ScrollView style={styles.container}>
