@@ -13,6 +13,7 @@ export const AdditionalInfo = ({
   dateOfBirth = '',
   specialization = '',
   email = '',
+  onChangeInfo = () => {},
 }) => (
   <View style={styles.container}>
     <CalendarField
@@ -21,22 +22,26 @@ export const AdditionalInfo = ({
       placeholder={texts.dateOfBirth.placeholder}
       style={inputStyles.container}
       iconStyle={styles.iconStyles}
+      onChangeText={date => onChangeInfo({ dateOfBirth: date })}
     />
     <InputField
       value={specialization}
       title={texts.specialization.title}
       placeholder={texts.specialization.placeholder}
       extStyle={inputStyles}
+      onChangeText={text => onChangeInfo({ specialization: text })}
     />
     <PasswordField
       title={texts.password.title}
       placeholder={texts.password.placeholder}
       style={inputStyles.container}
+      onChangeText={text => onChangeInfo({ password: text })}
     />
     <InputField
       value={email}
       title={texts.email.title}
       placeholder={texts.email.placeholder}
+      onChangeText={text => onChangeInfo({ email: text })}
     />
   </View>
 );

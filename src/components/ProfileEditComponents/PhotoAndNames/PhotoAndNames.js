@@ -7,7 +7,13 @@ import { InputField } from '../../InputFields/InputField/InputField';
 
 import { styles, avatarSize, inputStyles } from './styles';
 
-export const PhotoAndNames = ({ avatar, name, surname, onAvatarPress }) => (
+export const PhotoAndNames = ({
+  avatar,
+  name,
+  surname,
+  onAvatarPress,
+  onChangeNames,
+}) => (
   <View style={styles.container}>
     <AvatarEditable
       imageSource={avatar}
@@ -20,8 +26,14 @@ export const PhotoAndNames = ({ avatar, name, surname, onAvatarPress }) => (
         placeholder="Введите фамилию"
         value={surname}
         extStyle={inputStyles}
+        onChangeText={text => onChangeNames({ lastName: text })}
       />
-      <InputField title="Ваше имя" placeholder="Введите имя" value={name} />
+      <InputField
+        title="Ваше имя"
+        placeholder="Введите имя"
+        value={name}
+        onChangeText={text => onChangeNames({ firstName: text })}
+      />
     </View>
   </View>
 );

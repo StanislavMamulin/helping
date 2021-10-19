@@ -13,7 +13,7 @@ export const AvatarEditable = ({
     <ImageBackground
       source={{ uri: imageSource }}
       style={avatarStyle(size).avatar}
-      resizeMode="contain"
+      resizeMode="cover"
     >
       <View style={styles.textUnderlay}>
         <Text style={styles.text}>{`Сменить\nфото`}</Text>
