@@ -34,7 +34,12 @@ export const ProfileScreen = ({ navigation }) => {
 
   useLayoutEffect(() => {
     navigation.setOptions({
-      headerRight: () => <HeaderRightButton type="edit" onPress={() => {}} />,
+      headerRight: () => (
+        <HeaderRightButton
+          type="edit"
+          onPress={() => navigation.navigate('ProfileEdit')}
+        />
+      ),
     });
   }, [navigation]);
 

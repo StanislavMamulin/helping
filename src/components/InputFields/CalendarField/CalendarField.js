@@ -9,14 +9,15 @@ import { styles } from './styles';
 const bottomBorderStyle = active =>
   active ? styles.textInputFocused : styles.textInputBlurred;
 
-export const PasswordField = ({
-  value = '',
+export const CalendarField = ({
+  date = '',
   onChangeText = () => {},
   style = {},
-  placeholder = 'Введите пароль',
-  title = 'Пароль',
+  iconStyle = {},
+  title = '',
+  placeholder = '',
+  onCalendarPress = () => {},
 }) => {
-  const [isHidePassword, setIsHidePassword] = useState(true);
   const [isActive, setIsActive] = useState(false);
 
   return (
@@ -25,8 +26,7 @@ export const PasswordField = ({
         <InputField
           title={title}
           placeholder={placeholder}
-          secureTextEntry={isHidePassword}
-          value={value}
+          value={date}
           onChangeText={onChangeText}
           multiline={false}
           style={{ borderBottomWidth: 0 }}
@@ -35,27 +35,23 @@ export const PasswordField = ({
         />
       </View>
       <View style={styles.showHideContainer}>
-        <TouchableOpacity
-          style={styles.show}
-          onPress={() => setIsHidePassword(false)}
-        >
-          <Image source={{ uri: 'open' }} style={styles.icons} />
-        </TouchableOpacity>
-        <TouchableOpacity
-          style={styles.hide}
-          onPress={() => setIsHidePassword(true)}
-        >
-          <Image source={{ uri: 'close' }} style={styles.icons} />
+        <TouchableOpacity onPress={onCalendarPress}>
+          <Image
+            source={{ uri: 'icon_calendar' }}
+            style={[styles.icon, iconStyle]}
+          />
         </TouchableOpacity>
       </View>
     </View>
   );
 };
 
-PasswordField.propTypes = {
-  value: PropTypes.string,
+CalendarField.propTypes = {
+  date: PropTypes.string,
   onChangeText: PropTypes.func,
   style: PropTypes.object,
-  title: PropTypes.string,
-  placeholder: PropTypes.string,
+  iconStyle: PropTypes.object,
+  title: PropTypes.string.isRequired,
+  placeholder: PropTypes.string.isRequired,
+  onCalendarPress: PropTypes.func,
 };
