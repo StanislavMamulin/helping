@@ -12,7 +12,10 @@ export const HelpersList = ({
 }) => (
   <View style={styles.avatarsContainer}>
     {helpers.slice(0, numberOfHelpersToShow).map((helper, index) => (
-      <View style={{ left: index * -5, zIndex: numberOfHelpersToShow - index }}>
+      <View
+        style={{ left: index * -5, zIndex: numberOfHelpersToShow - index }} 
+        key={index}
+      >
         <Avatar
           size={AVATAR_SIZE}
           imageSource={helper.avatar}
@@ -25,4 +28,6 @@ export const HelpersList = ({
 
 HelpersList.propTypes = {
   helpers: PropTypes.arrayOf(PropTypes.objectOf(PropTypes.string)).isRequired,
+  numberOfHelpersToShow: PropTypes.number,
+  backgroundColor: PropTypes.string,
 };
